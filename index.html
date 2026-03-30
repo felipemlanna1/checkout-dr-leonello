@@ -266,6 +266,28 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 .deletion-warning strong{display:block;font-size:.78rem;font-weight:700;margin-bottom:2px}
 .deletion-warning span{font-size:.72rem;color:var(--muted);line-height:1.5}
 
+/* Domain Selector */
+.domain-block{margin-bottom:20px}
+.domain-label{display:block;font-size:.75rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.domain-input-wrap{
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg2);border:1.5px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:10px 14px;transition:border-color .15s
+}
+.domain-input-wrap:focus-within{border-color:var(--gold)}
+.domain-input-wrap svg{color:var(--dim);flex-shrink:0}
+.domain-input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--white);font-family:monospace;font-size:.88rem;
+  min-width:0
+}
+.domain-input::placeholder{color:var(--dim)}
+.domain-suffix{color:var(--muted);font-family:monospace;font-size:.88rem;flex-shrink:0}
+.domain-status{
+  display:flex;align-items:center;gap:5px;
+  margin-top:6px;font-size:.7rem;color:var(--green)
+}
+
 /* ========== MOBILE STICKY ========== */
 .sticky{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
@@ -335,26 +357,31 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
       </div>
     </div>
 
-    <!-- Deletion Warning -->
-    <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:12px 14px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>
-        <div style="font-size:.78rem;font-weight:700;color:#ef4444;margin-bottom:2px">Este site sera deletado em 48 horas</div>
-        <div style="font-size:.72rem;color:var(--muted);line-height:1.5">Por ser uma demonstracao gratuita, o site e todos os arquivos serao permanentemente removidos apos o prazo. Ative agora para garantir.</div>
+    <!-- Price -->
+    <div class="price-block">
+      <div class="price-promo">Pacote completo — 1 ano incluso</div>
+      <div class="price-row">
+        <span class="price-old">R$ 2.997</span>
+        <span class="price-now">R$ 1.497</span>
+      </div>
+      <div class="price-period">Site + dominio + hospedagem + SSL + suporte por 12 meses</div>
+      <div class="price-monthly">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+        <strong>Zero mensalidade.</strong> Tudo incluso por 1 ano. Sem surpresas.
       </div>
     </div>
 
-    <!-- Price -->
-    <div class="price-block">
-      <div class="price-promo">50% OFF — Primeiro cliente</div>
-      <div class="price-row">
-        <span class="price-old">R$ 2.000</span>
-        <span class="price-now">R$ 1.000</span>
+    <!-- Domain Selector -->
+    <div class="domain-block">
+      <label class="domain-label">Escolha seu dominio</label>
+      <div class="domain-input-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" placeholder="seudominio" spellcheck="false" oninput="checkDomain()">
+        <span class="domain-suffix">.com.br</span>
       </div>
-      <div class="price-period">Taxa única de ativação</div>
-      <div class="price-monthly">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        + <strong>R$ 49,90/mês</strong> (hospedagem, domínio, SSL, suporte)
+      <div class="domain-status" id="domainStatus">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+        Dominio incluso no pacote
       </div>
     </div>
 
@@ -364,22 +391,22 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
         <div class="method-radio"></div>
         <div class="method-info">
           <div class="method-name">PIX</div>
-          <div class="method-detail">R$ 900,00 (desconto extra de 10%)</div>
+          <div class="method-detail">R$ 1.297,00 (economia de R$ 200)</div>
         </div>
-        <span class="method-tag">Melhor preço</span>
+        <span class="method-tag">Melhor preco</span>
       </button>
       <button class="method" data-method="credit_card" onclick="pickMethod(this)">
         <div class="method-radio"></div>
         <div class="method-info">
-          <div class="method-name">Cartão de Crédito</div>
-          <div class="method-detail">R$ 1.000,00 à vista</div>
+          <div class="method-name">Cartao de Credito</div>
+          <div class="method-detail">R$ 1.497,00 a vista</div>
         </div>
       </button>
       <button class="method" data-method="installments" onclick="pickMethod(this)">
         <div class="method-radio"></div>
         <div class="method-info">
-          <div class="method-name">Até 10x no Cartão</div>
-          <div class="method-detail">10x de R$ 100,00</div>
+          <div class="method-name">Ate 10x no Cartao</div>
+          <div class="method-detail">10x de R$ 149,70</div>
         </div>
       </button>
     </div>
@@ -417,7 +444,7 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
         <li>Domínio .com.br</li>
         <li>Suporte via WhatsApp</li>
         <li>3 rodadas de ajustes</li>
-        <li>Performance A+</li>
+        <li>12 meses tudo incluso</li>
       </ul>
     </div>
   </div>
@@ -494,8 +521,8 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
   <h2 style="font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px">Pronto para ativar?</h2>
   <p style="color:var(--dim);font-size:.85rem;margin-bottom:20px">Seu site sera deletado quando o timer zerar. Ative antes.</p>
   <button class="btn-pay" onclick="scrollTop()">
-    Ativar meu site — R$ 900 no PIX
-    <span>ou 10x de R$ 100 no cartão</span>
+    Ativar meu site — R$ 1.297 no PIX
+    <span>ou 10x de R$ 149,70 no cartao</span>
   </button>
   <div class="trust-line" style="margin-top:12px">
     <div class="trust-item">
@@ -518,7 +545,7 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 <!-- MOBILE STICKY -->
 <div class="sticky" id="sticky">
   <div class="sticky-inner">
-    <div class="sticky-price">PIX <strong>R$ 900</strong></div>
+    <div class="sticky-price">PIX <strong>R$ 1.297</strong></div>
     <button class="sticky-btn" onclick="scrollTop()">Ativar site</button>
   </div>
 </div>
@@ -566,6 +593,13 @@ function togFaq(btn){
   if(!open)item.classList.add('open');
 }
 
+// Domain check
+function checkDomain(){
+  const v=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
+  document.getElementById('domainInput').value=v;
+  document.querySelector('.preview-url').textContent=v?v+'.com.br':'seudominio.com.br';
+}
+
 // Scroll top
 function scrollTop(){document.querySelector('.hero-right').scrollIntoView({behavior:'smooth'})}
 
@@ -577,7 +611,7 @@ async function pay(){
     try{
       const r=await fetch(`${API}/api/checkout/${TOKEN}/create-billing`,{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({payment_method:method,domain:'drleonellobocchese.com.br',installments:method==='installments'?10:1})
+        body:JSON.stringify({payment_method:method,domain:'drleonellobocchese.com.br',amount:method==='pix'?129700:149700,installments:method==='installments'?10:1})
       });
       const d=await r.json();
       if(d.checkout_url)return window.location.href=d.checkout_url;

@@ -55,6 +55,17 @@ h1{font-size:1.4rem;font-weight:800;color:var(--white);line-height:1.2;margin-bo
 h1 em{color:var(--gold);font-style:normal}
 .sub{color:var(--muted);font-size:.8rem;margin-bottom:12px}
 
+/* See site */
+.see-site{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.78rem;font-weight:600;color:var(--gold);
+  text-decoration:none;margin-bottom:14px;
+  padding:8px 16px;border-radius:8px;
+  border:1px solid rgba(200,169,110,.2);
+  background:rgba(200,169,110,.05);transition:all .15s
+}
+.see-site:hover{background:rgba(200,169,110,.1);border-color:rgba(200,169,110,.35)}
+
 /* Warn */
 .warn{
   background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);
@@ -225,6 +236,12 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
     <div class="badge">Site pronto</div>
     <h1>Dr. Leonello, seu <em>novo site</em> esta pronto.</h1>
     <p class="sub">Ative agora antes que expire. Tudo incluso por 12 meses.</p>
+
+    <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="see-site">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Ver meu site
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+    </a>
 
     <!-- Warn -->
     <div class="warn">

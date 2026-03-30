@@ -454,24 +454,32 @@ function fmtExp(el){
   el.value=v;
 }
 
-// Domain check via whois
+// Domain check via RDAP registro.br
 async function checkDomain(){
-  const dom=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'')+'.com.br';
+  const raw=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
+  if(!raw){return}
+  const dom=raw+'.com.br';
   const st=document.getElementById('domainStatus');
   const btn=document.getElementById('domainBtn');
   btn.textContent='Verificando...';btn.disabled=true;
   st.className='domain-status loading';st.textContent='Consultando registro.br...';
   try{
-    // Use whois proxy or fallback to DNS check
-    const r=await fetch('https://dns.google/resolve?name='+dom+'&type=A');
-    const d=await r.json();
-    if(d.Answer){
-      st.className='domain-status fail';st.textContent='Dominio ja registrado. Tente outro.';
+    const r=await fetch('https://rdap.registro.br/domain/'+dom);
+    if(r.status===200){
+      // Domain exists in registro.br
+      st.className='domain-status fail';
+      st.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg> Dominio <b>'+dom+'</b> ja esta registrado. Tente outro.';
+    }else if(r.status===404){
+      // Domain not found = available
+      st.className='domain-status ok';
+      st.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg> Disponivel! <b>'+dom+'</b> sera registrado na ativacao.';
     }else{
-      st.className='domain-status ok';st.textContent='Disponivel! Dominio sera registrado na ativacao.';
+      throw new Error('status '+r.status);
     }
   }catch(e){
-    st.className='domain-status ok';st.textContent='Nao foi possivel verificar agora. Confirmaremos apos a ativacao.';
+    // CORS or network error — link to registro.br
+    st.className='domain-status loading';
+    st.innerHTML='Nao foi possivel verificar automaticamente. <a href="https://registro.br/dominio/disponibilidade/?searchedDomain='+raw+'" target="_blank" style="color:var(--gold);text-decoration:underline">Verificar no registro.br</a>';
   }
   btn.textContent='Verificar';btn.disabled=false;
 }

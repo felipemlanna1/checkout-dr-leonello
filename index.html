@@ -143,7 +143,13 @@ h1 em{color:var(--gold);font-style:normal}
   flex:1;background:none;border:none;outline:none;
   color:var(--white);font-family:monospace;font-size:.82rem;min-width:0
 }
-.domain-ext{color:var(--muted);font-family:monospace;font-size:.82rem;flex-shrink:0}
+.domain-ext{
+  color:var(--gold);font-family:monospace;font-size:.82rem;flex-shrink:0;
+  background:var(--bg3);border:1px solid rgba(200,169,110,.2);border-radius:4px;
+  padding:4px 6px;cursor:pointer;outline:none;
+  -webkit-appearance:none;appearance:none
+}
+.domain-ext option{background:var(--bg2);color:var(--white)}
 .domain-btn{
   padding:9px 16px;border:none;border-radius:8px;
   background:var(--bg3);color:var(--gold);font-size:.72rem;font-weight:600;
@@ -196,30 +202,6 @@ h1 em{color:var(--gold);font-style:normal}
 .inc li{font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:5px}
 .inc li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-/* Reviews */
-.review{
-  background:var(--bg2);border:1px solid rgba(255,255,255,.04);
-  border-radius:var(--r);padding:14px;margin-bottom:8px
-}
-.review q{font-size:.78rem;color:var(--muted);font-style:italic;line-height:1.5;display:block;margin-bottom:4px}
-.review cite{font-size:.68rem;color:var(--dim);font-style:normal;font-weight:600}
-
-/* FAQ */
-.faq-item{border-bottom:1px solid rgba(255,255,255,.05)}
-.faq-q{
-  width:100%;padding:10px 0;display:flex;align-items:center;justify-content:space-between;
-  background:none;border:none;color:var(--white);font-size:.78rem;font-weight:500;
-  cursor:pointer;text-align:left;font-family:var(--sans);gap:10px
-}
-.faq-q svg{width:13px;height:13px;color:var(--gold);flex-shrink:0;transition:transform .3s}
-.faq-item.open .faq-q svg{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
-.faq-item.open .faq-a{max-height:140px}
-.faq-a p{padding:0 0 10px;font-size:.72rem;color:var(--muted);line-height:1.5}
-
-/* Final */
-.final{padding:36px 0;text-align:center;background:linear-gradient(var(--bg),var(--bg2))}
-.final .btn{max-width:400px;margin:0 auto}
 
 footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
 
@@ -312,7 +294,12 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
       <div class="domain-wrap">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" spellcheck="false">
-        <span class="domain-ext">.com.br</span>
+        <select class="domain-ext" id="domainExt">
+          <option value=".com.br">.com.br</option>
+          <option value=".med.br">.med.br</option>
+          <option value=".com">.com</option>
+          <option value=".srv.br">.srv.br</option>
+        </select>
       </div>
       <button class="domain-btn" id="domainBtn" onclick="checkDomain()">Verificar</button>
     </div>
@@ -347,71 +334,6 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
   </div>
 </div>
 
-<!-- Included -->
-<div class="section anim">
-  <div class="wrap">
-    <div class="domain-label" style="margin-bottom:8px">Incluso no pacote</div>
-    <ul class="inc">
-      <li>14 secoes exclusivas</li>
-      <li>SEO cirurgiao plastico</li>
-      <li>100% responsivo</li>
-      <li>SSL + cadeado verde</li>
-      <li>Dominio .com.br</li>
-      <li>Suporte WhatsApp</li>
-      <li>3 rodadas de ajustes</li>
-      <li>12 meses completos</li>
-    </ul>
-  </div>
-</div>
-
-<!-- Reviews -->
-<div class="section anim">
-  <div class="wrap">
-    <div class="domain-label" style="margin-bottom:8px">Avaliacoes dos pacientes</div>
-    <div class="review">
-      <q>Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas.</q>
-      <cite>— Mariana R. via Google</cite>
-    </div>
-    <div class="review">
-      <q>A seguranca que o Dr. Leonello transmite e incomparavel. Minha lipo ficou natural e perfeita.</q>
-      <cite>— Carolina S. via Google</cite>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<div class="section anim">
-  <div class="wrap">
-    <div class="domain-label" style="margin-bottom:8px">Duvidas rapidas</div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">Preciso fazer alguma coisa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Nada. Cuidamos de tudo: dominio, hospedagem, SSL, publicacao.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">E se eu nao gostar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>7 dias de garantia. Devolvemos 100%, sem perguntas.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">Quanto tempo para ficar no ar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Ate 24 horas apos o pagamento, com seu dominio.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">O que acontece apos 12 meses?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Renovacao opcional R$ 49,90/mes. Sem multa, cancele quando quiser.</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- Final CTA -->
-<div class="final">
-  <div class="wrap">
-    <p style="font-size:.8rem;color:var(--dim);margin-bottom:14px">Seu site sera deletado quando o timer zerar.</p>
-    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      Ativar meu site — R$ 1.297 no PIX
-      <small>ou 10x de R$ 149,70</small>
-    </button>
-  </div>
-</div>
 
 <footer>Proposta exclusiva — Dr. Leonello Bocchese — Clinica Adelle, Florianopolis/SC</footer>
 </div>
@@ -458,13 +380,15 @@ function fmtExp(el){
 async function checkDomain(){
   const raw=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
   if(!raw){return}
-  const dom=raw+'.com.br';
+  const ext=document.getElementById('domainExt').value;
+  const dom=raw+ext;
   const st=document.getElementById('domainStatus');
   const btn=document.getElementById('domainBtn');
   btn.textContent='Verificando...';btn.disabled=true;
   st.className='domain-status loading';st.textContent='Consultando registro.br...';
   try{
-    const r=await fetch('https://rdap.registro.br/domain/'+dom);
+    const rdap=ext==='.com'?'https://rdap.verisign.com/com/v1/domain/':'https://rdap.registro.br/domain/';
+    const r=await fetch(rdap+dom);
     if(r.status===200){
       // Domain exists in registro.br
       st.className='domain-status fail';
@@ -485,17 +409,11 @@ async function checkDomain(){
 }
 
 // FAQ
-function togFaq(btn){
-  const item=btn.parentElement,open=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!open)item.classList.add('open');
-}
-
 // Pay
 async function pay(){
   const btn=document.getElementById('payBtn');
   btn.disabled=true;btn.textContent='Processando...';
-  const dom=document.getElementById('domainInput').value.trim()+'.com.br';
+  const dom=document.getElementById('domainInput').value.trim()+document.getElementById('domainExt').value;
   if(API){
     try{
       const r=await fetch(API+'/api/checkout/'+TOKEN+'/create-billing',{

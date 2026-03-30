@@ -3,852 +3,566 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seu Site Profissional Está Pronto | Dr. Leonello Bocchese</title>
-<meta name="description" content="Proposta exclusiva: site profissional para Dr. Leonello Bocchese - Cirurgião Plástico. Veja o resultado e ative agora.">
+<title>Ative seu Site | Dr. Leonello Bocchese</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#09090b;--bg2:#111113;--bg3:#18181b;
   --gold:#c8a96e;--gold-light:#dbc295;--gold-dark:#a8884e;
-  --text:#e4e4e7;--text-muted:#a1a1aa;--text-dim:#71717a;
+  --text:#e4e4e7;--muted:#a1a1aa;--dim:#71717a;
   --white:#fafafa;--green:#22c55e;--red:#ef4444;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --radius:12px;--radius-lg:20px;
+  --sans:'Inter',-apple-system,sans-serif;
+  --r:12px;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
 img{max-width:100%;display:block}
-a{color:var(--gold);text-decoration:none}
 
-/* Utility */
-.container{max-width:960px;margin:0 auto;padding:0 20px}
-.gold-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:12px auto}
-.section-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;color:var(--white);text-align:center;letter-spacing:-0.02em}
-.section-sub{text-align:center;color:var(--text-muted);max-width:540px;margin:12px auto 0;font-size:0.95rem}
-
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.fade-up{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.16,1,.3,1)}
-.fade-up.visible{opacity:1;transform:translateY(0)}
-
-/* ============ HEADER ============ */
-.top-bar{
-  position:fixed;top:0;left:0;right:0;z-index:50;
-  background:rgba(9,9,11,.85);backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(200,169,110,.08);
-  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
-  transition:all .3s
+/* ========== URGENCY BAR ========== */
+.urgency{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:linear-gradient(90deg,#b91c1c,#dc2626,#b91c1c);
+  color:white;text-align:center;padding:10px 16px;
+  font-size:.8rem;font-weight:600;letter-spacing:.02em;
+  display:flex;align-items:center;justify-content:center;gap:8px
 }
-.top-bar.scrolled{padding:10px 20px;background:rgba(9,9,11,.95)}
-.top-bar-left{display:flex;align-items:center;gap:10px}
-.top-bar-badge{
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
-  padding:4px 10px;border-radius:100px
+.urgency-timer{
+  font-variant-numeric:tabular-nums;
+  background:rgba(0,0,0,.3);padding:3px 10px;border-radius:4px;font-weight:700
 }
-.top-bar-text{font-family:var(--serif);color:var(--gold-light);font-size:.9rem;display:none}
-@media(min-width:640px){.top-bar-text{display:block}}
-.top-bar-timer{
-  font-variant-numeric:tabular-nums;font-size:.85rem;font-weight:600;color:var(--gold);
-  display:flex;align-items:center;gap:6px
-}
-.top-bar-timer svg{width:16px;height:16px;animation:pulse 2s infinite}
 
-/* ============ HERO ============ */
+/* ========== MAIN LAYOUT ========== */
+.page{padding:52px 0 0}
+
+/* ========== HERO SPLIT ========== */
 .hero{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:100px 20px 60px;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%)
+  display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 52px);
+  gap:0;position:relative
 }
-.hero::before{
-  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23c8a96e' stroke-opacity='.03' stroke-width='.5'/%3E%3C/svg%3E");
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;min-height:auto}
 }
-.hero-content{position:relative;z-index:1;text-align:center;max-width:700px;animation:fadeUp .8s ease-out}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;
-  color:var(--gold);margin-bottom:24px;
-  background:rgba(200,169,110,.08);padding:8px 20px;border-radius:100px;
-  border:1px solid rgba(200,169,110,.15)
-}
-.hero-eyebrow svg{width:14px;height:14px}
-.hero h1{
-  font-family:var(--serif);font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:700;
-  color:var(--white);line-height:1.15;margin-bottom:16px;letter-spacing:-0.03em
-}
-.hero h1 span{
-  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
-}
-.hero-p{color:var(--text-muted);font-size:1.05rem;max-width:520px;margin:0 auto 36px;line-height:1.7}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-weight:700;font-size:1rem;
-  padding:16px 36px;border-radius:100px;border:none;cursor:pointer;
-  transition:all .3s;box-shadow:0 4px 24px rgba(200,169,110,.25)
-}
-.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,169,110,.35)}
-.hero-cta svg{width:18px;height:18px}
-.hero-proof{
-  margin-top:40px;display:flex;align-items:center;justify-content:center;gap:24px;
-  color:var(--text-dim);font-size:.82rem
-}
-.hero-proof-item{display:flex;align-items:center;gap:6px}
-.hero-proof-item svg{width:16px;height:16px;color:var(--gold)}
 
-/* ============ PREVIEW ============ */
-.preview{padding:80px 20px;background:var(--bg2)}
-.preview-frame-wrap{
-  max-width:900px;margin:40px auto 0;position:relative;
-  border-radius:var(--radius-lg);overflow:hidden;
-  border:1px solid rgba(200,169,110,.1);
-  box-shadow:0 20px 60px rgba(0,0,0,.4)
+/* LEFT — Site Preview */
+.hero-left{
+  background:var(--bg2);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  border-right:1px solid rgba(255,255,255,.04)
 }
-.preview-toolbar{
-  background:var(--bg3);padding:12px 16px;display:flex;align-items:center;gap:8px;
-  border-bottom:1px solid rgba(255,255,255,.06)
+.preview-label{
+  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:.72rem;color:var(--dim)
 }
-.preview-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.12)}
-.preview-dot:nth-child(1){background:#ef4444}
-.preview-dot:nth-child(2){background:#eab308}
-.preview-dot:nth-child(3){background:#22c55e}
+.preview-dots{display:flex;gap:6px}
+.preview-dots span{width:8px;height:8px;border-radius:50%}
+.preview-dots span:nth-child(1){background:#ef4444}
+.preview-dots span:nth-child(2){background:#eab308}
+.preview-dots span:nth-child(3){background:#22c55e}
 .preview-url{
-  flex:1;margin-left:12px;background:rgba(255,255,255,.06);
-  border-radius:6px;padding:6px 12px;font-size:.75rem;color:var(--text-dim);
-  font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+  background:rgba(255,255,255,.05);padding:4px 12px;border-radius:4px;
+  font-family:monospace;font-size:.7rem
 }
-.preview-visit{
-  font-size:.7rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;
-  padding:6px 14px;border:1px solid rgba(200,169,110,.3);border-radius:6px;
-  background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap
+.preview-live{
+  color:var(--gold);font-weight:600;font-size:.7rem;text-decoration:none;
+  display:flex;align-items:center;gap:4px
 }
-.preview-visit:hover{background:rgba(200,169,110,.1)}
-.preview-img{width:100%;display:block}
-.preview-img.hidden{display:none}
-
-.device-tabs{
-  display:flex;justify-content:center;gap:8px;margin-top:24px
+.preview-live:hover{text-decoration:underline}
+.preview-scroll{
+  flex:1;overflow-y:auto;overflow-x:hidden;position:relative;
+  max-height:calc(100vh - 100px)
 }
-.device-tab{
-  padding:8px 20px;border-radius:100px;border:1px solid rgba(200,169,110,.15);
-  background:transparent;color:var(--text-muted);font-size:.8rem;font-weight:500;
-  cursor:pointer;transition:all .2s
-}
-.device-tab.active{background:rgba(200,169,110,.12);color:var(--gold);border-color:var(--gold)}
-.device-tab:hover:not(.active){background:rgba(255,255,255,.04)}
-
-/* ============ STATS ============ */
-.stats{padding:60px 20px;border-top:1px solid rgba(200,169,110,.06);border-bottom:1px solid rgba(200,169,110,.06)}
-.stats-grid{
-  max-width:800px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center
-}
-.stat-num{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--gold)}
-.stat-label{font-size:.75rem;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
-@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:32px 16px}}
-
-/* ============ BENEFITS ============ */
-.benefits{padding:80px 20px;background:var(--bg)}
-.benefits-grid{
-  max-width:800px;margin:40px auto 0;
-  display:grid;grid-template-columns:1fr 1fr;gap:16px
-}
-.benefit{
-  padding:28px 24px;border-radius:var(--radius);
-  background:var(--bg2);border:1px solid rgba(255,255,255,.04);
-  transition:all .3s
-}
-.benefit:hover{border-color:rgba(200,169,110,.15);transform:translateY(-2px)}
-.benefit-icon{
-  width:40px;height:40px;border-radius:10px;
-  background:rgba(200,169,110,.08);
-  display:flex;align-items:center;justify-content:center;margin-bottom:14px
-}
-.benefit-icon svg{width:20px;height:20px;color:var(--gold)}
-.benefit h3{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:6px}
-.benefit p{font-size:.82rem;color:var(--text-muted);line-height:1.5}
-@media(max-width:600px){.benefits-grid{grid-template-columns:1fr}}
-
-/* ============ INVESTMENT ============ */
-.investment{padding:80px 20px;background:var(--bg2)}
-.pricing-card{
-  max-width:480px;margin:40px auto 0;
-  background:linear-gradient(145deg,var(--bg3),var(--bg));
-  border:1px solid rgba(200,169,110,.2);border-radius:var(--radius-lg);
-  padding:40px 32px;position:relative;overflow:hidden
-}
-.pricing-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--gold-dark),var(--gold-light),var(--gold-dark))
-}
-.pricing-badge{
-  display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
-  background:linear-gradient(135deg,#22c55e,#16a34a);color:white;
-  padding:5px 14px;border-radius:100px;margin-bottom:20px
-}
-.price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
-.price-original{font-size:1.3rem;color:var(--text-dim);text-decoration:line-through}
-.price-current{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--white)}
-.price-label{font-size:.85rem;color:var(--text-muted);margin-bottom:28px}
-
-.payment-options{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.payment-opt{
-  display:flex;align-items:center;gap:12px;
-  padding:14px 16px;border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);
-  cursor:pointer;transition:all .2s;position:relative
-}
-.payment-opt:hover,.payment-opt.selected{border-color:var(--gold);background:rgba(200,169,110,.05)}
-.payment-opt.selected::after{
-  content:'';position:absolute;right:14px;top:50%;transform:translateY(-50%);
-  width:8px;height:8px;border-radius:50%;background:var(--gold)
-}
-.payment-radio{
-  width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.2);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s
-}
-.payment-opt.selected .payment-radio{border-color:var(--gold)}
-.payment-opt.selected .payment-radio::after{
-  content:'';width:8px;height:8px;border-radius:50%;background:var(--gold)
-}
-.payment-info{flex:1}
-.payment-method{font-size:.85rem;font-weight:600;color:var(--white)}
-.payment-value{font-size:.78rem;color:var(--text-muted);margin-top:2px}
-.payment-tag{
-  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
-  background:rgba(34,197,94,.15);color:#22c55e;padding:3px 8px;border-radius:4px
+.preview-scroll img{width:100%;display:block}
+.preview-overlay{
+  position:absolute;bottom:0;left:0;right:0;height:120px;
+  background:linear-gradient(transparent,var(--bg2));pointer-events:none
 }
 
-.monthly-note{
-  display:flex;align-items:center;gap:10px;
-  padding:14px 16px;border-radius:var(--radius);
-  background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.08);
-  margin-bottom:28px
+@media(max-width:860px){
+  .hero-left{max-height:45vh}
+  .preview-scroll{max-height:38vh}
 }
-.monthly-note span{font-size:.82rem;color:var(--text-muted)}
-.monthly-note strong{color:var(--white)}
 
+/* RIGHT — Checkout */
+.hero-right{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:40px 32px;position:relative;
+  background:var(--bg)
+}
+@media(min-width:861px){
+  .hero-right{padding:40px 48px;max-height:100vh;overflow-y:auto}
+}
+
+.checkout-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--green);margin-bottom:16px
+}
+.checkout-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--green);
+  animation:blink 1.5s infinite
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.checkout-title{
+  font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--white);
+  line-height:1.2;margin-bottom:8px;letter-spacing:-.03em
+}
+.checkout-title span{color:var(--gold)}
+.checkout-sub{color:var(--muted);font-size:.9rem;margin-bottom:28px;line-height:1.6}
+
+/* Price Block */
+.price-block{
+  background:var(--bg2);border:1px solid rgba(200,169,110,.15);
+  border-radius:var(--r);padding:24px;margin-bottom:20px
+}
+.price-promo{
+  display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;background:var(--red);color:white;
+  padding:4px 10px;border-radius:4px;margin-bottom:12px
+}
+.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.price-old{font-size:1.1rem;color:var(--dim);text-decoration:line-through}
+.price-now{font-size:2.4rem;font-weight:800;color:var(--white);letter-spacing:-.03em}
+.price-period{font-size:.82rem;color:var(--muted)}
+.price-monthly{
+  margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);
+  font-size:.78rem;color:var(--dim);display:flex;align-items:center;gap:6px
+}
+.price-monthly strong{color:var(--muted)}
+
+/* Payment Methods */
+.methods{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.method{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  border-radius:8px;border:1.5px solid rgba(255,255,255,.08);
+  background:transparent;cursor:pointer;transition:all .15s;
+  font-family:var(--sans);text-align:left;color:var(--text);width:100%
+}
+.method:hover{border-color:rgba(200,169,110,.25);background:rgba(200,169,110,.03)}
+.method.active{border-color:var(--gold);background:rgba(200,169,110,.06)}
+.method-radio{
+  width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.2);
+  flex-shrink:0;position:relative;transition:all .15s
+}
+.method.active .method-radio{border-color:var(--gold)}
+.method.active .method-radio::after{
+  content:'';position:absolute;inset:3px;border-radius:50%;background:var(--gold)
+}
+.method-info{flex:1}
+.method-name{font-size:.82rem;font-weight:600;color:var(--white)}
+.method-detail{font-size:.72rem;color:var(--muted);margin-top:1px}
+.method-tag{
+  font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  background:rgba(34,197,94,.12);color:var(--green);padding:3px 7px;border-radius:3px;
+  white-space:nowrap
+}
+
+/* CTA Button */
 .btn-pay{
-  width:100%;padding:18px 24px;border:none;border-radius:var(--radius);
+  width:100%;padding:16px;border:none;border-radius:var(--r);
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-size:1.05rem;font-weight:700;cursor:pointer;
-  transition:all .3s;position:relative;overflow:hidden
+  color:var(--bg);font-size:1rem;font-weight:700;cursor:pointer;
+  transition:all .2s;margin-bottom:12px;position:relative;overflow:hidden
 }
-.btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(200,169,110,.3)}
+.btn-pay:hover{box-shadow:0 6px 20px rgba(200,169,110,.3);transform:translateY(-1px)}
 .btn-pay:active{transform:translateY(0)}
-.btn-pay:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.btn-pay-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;margin-top:4px}
+.btn-pay:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-pay span{display:block;font-size:.7rem;font-weight:500;opacity:.7;margin-top:3px}
 
-.guarantee{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:16px;font-size:.78rem;color:var(--text-dim)
+/* Trust line */
+.trust-line{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
+  font-size:.7rem;color:var(--dim);margin-bottom:24px
 }
-.guarantee svg{width:16px;height:16px;color:var(--green)}
+.trust-item{display:flex;align-items:center;gap:4px}
+.trust-item svg{width:13px;height:13px;color:var(--green)}
 
-/* ============ COUNTDOWN ============ */
-.countdown-section{
-  padding:60px 20px;
-  background:linear-gradient(135deg,rgba(200,169,110,.04),rgba(200,169,110,.01))
+/* Included list */
+.included{margin-top:8px}
+.included-title{font-size:.75rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.included-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.included-list li{
+  font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px
 }
-.countdown-wrap{
-  max-width:600px;margin:0 auto;text-align:center
+.included-list li::before{
+  content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0
 }
-.countdown-grid{
-  display:flex;justify-content:center;gap:16px;margin:28px 0 16px
-}
-.countdown-block{
-  min-width:72px;padding:16px 12px;
-  background:var(--bg2);border:1px solid rgba(200,169,110,.1);border-radius:var(--radius);
-  text-align:center
-}
-.countdown-num{
-  font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--gold);
-  font-variant-numeric:tabular-nums;line-height:1
-}
-.countdown-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-top:6px}
-.countdown-msg{font-size:.85rem;color:var(--text-muted)}
-.countdown-msg strong{color:var(--gold-light)}
 
-/* ============ TRUST ============ */
-.trust{padding:60px 20px;background:var(--bg)}
-.trust-grid{
-  max-width:700px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center
-}
-.trust-item{padding:20px 12px}
-.trust-icon{
-  width:44px;height:44px;border-radius:50%;margin:0 auto 10px;
-  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
-  display:flex;align-items:center;justify-content:center
-}
-.trust-icon svg{width:20px;height:20px;color:var(--gold)}
-.trust-text{font-size:.75rem;color:var(--text-muted);line-height:1.4}
-@media(max-width:600px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+/* ========== BELOW FOLD — Extra convincing ========== */
+.extra{padding:60px 20px;border-top:1px solid rgba(255,255,255,.04)}
+.extra-center{max-width:700px;margin:0 auto}
+.extra h2{font-size:1.3rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:8px}
+.extra-sub{text-align:center;color:var(--dim);font-size:.85rem;margin-bottom:32px}
 
-/* ============ FAQ ============ */
-.faq{padding:80px 20px;background:var(--bg2)}
-.faq-list{max-width:640px;margin:40px auto 0}
+/* Device tabs */
+.devices{text-align:center;margin-bottom:32px}
+.device-tabs{display:inline-flex;gap:4px;background:var(--bg2);border-radius:8px;padding:4px}
+.dtab{
+  padding:8px 18px;border-radius:6px;border:none;background:transparent;
+  color:var(--muted);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .15s;
+  font-family:var(--sans)
+}
+.dtab.on{background:var(--bg3);color:var(--white)}
+.device-frame{
+  max-width:700px;margin:0 auto;border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);box-shadow:0 16px 48px rgba(0,0,0,.4)
+}
+.device-frame img{width:100%;display:block}
+.device-frame img.off{display:none}
+
+/* Reviews */
+.reviews{
+  padding:48px 20px;background:var(--bg2);
+  border-top:1px solid rgba(255,255,255,.04)
+}
+.reviews-center{max-width:600px;margin:0 auto;text-align:center}
+.reviews h2{font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.reviews-stars{color:var(--gold);font-size:1.2rem;margin-bottom:4px}
+.reviews-meta{font-size:.78rem;color:var(--dim);margin-bottom:24px}
+.review-card{
+  background:var(--bg);border:1px solid rgba(255,255,255,.04);
+  border-radius:var(--r);padding:20px;text-align:left;margin-bottom:12px
+}
+.review-text{font-size:.85rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:8px}
+.review-author{font-size:.75rem;color:var(--dim);font-weight:600}
+
+/* FAQ compact */
+.faq{padding:48px 20px;border-top:1px solid rgba(255,255,255,.04)}
+.faq-center{max-width:600px;margin:0 auto}
+.faq h2{font-size:1.2rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:24px}
 .faq-item{border-bottom:1px solid rgba(255,255,255,.05)}
 .faq-q{
-  width:100%;padding:20px 0;display:flex;align-items:center;justify-content:space-between;
-  background:none;border:none;color:var(--white);font-size:.92rem;font-weight:500;
-  cursor:pointer;text-align:left;font-family:var(--sans);gap:16px
+  width:100%;padding:14px 0;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;color:var(--white);font-size:.85rem;font-weight:500;
+  cursor:pointer;text-align:left;font-family:var(--sans);gap:12px
 }
-.faq-q svg{width:20px;height:20px;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-q svg{width:16px;height:16px;color:var(--gold);flex-shrink:0;transition:transform .3s}
 .faq-item.open .faq-q svg{transform:rotate(45deg)}
-.faq-a{
-  max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);
-  color:var(--text-muted);font-size:.85rem;line-height:1.7
-}
-.faq-item.open .faq-a{max-height:200px}
-.faq-a-inner{padding:0 0 20px}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:160px}
+.faq-a p{padding:0 0 14px;font-size:.8rem;color:var(--muted);line-height:1.6}
 
-/* ============ FINAL CTA ============ */
-.final-cta{
-  padding:100px 20px;text-align:center;position:relative;
-  background:radial-gradient(ellipse at 50% 100%,rgba(200,169,110,.06) 0%,transparent 60%)
+/* Final CTA */
+.final{
+  padding:48px 20px;text-align:center;
+  background:linear-gradient(180deg,var(--bg),var(--bg2))
 }
-.final-cta h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--white);font-weight:700;margin-bottom:16px}
-.final-cta p{color:var(--text-muted);max-width:500px;margin:0 auto 32px;font-size:.95rem}
+.final .btn-pay{max-width:400px;margin:0 auto 12px}
 
-/* ============ FOOTER ============ */
-footer{
-  padding:32px 20px;text-align:center;
-  border-top:1px solid rgba(255,255,255,.04);
-  font-size:.72rem;color:var(--text-dim)
-}
+footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 
-/* ============ STICKY CTA (Mobile) ============ */
-.sticky-cta{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:40;
-  background:rgba(9,9,11,.95);backdrop-filter:blur(20px);
-  border-top:1px solid rgba(200,169,110,.1);
-  padding:12px 20px;
-  transform:translateY(100%);transition:transform .3s
+/* ========== MOBILE STICKY ========== */
+.sticky{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:rgba(9,9,11,.97);backdrop-filter:blur(20px);
+  border-top:1px solid rgba(200,169,110,.15);
+  padding:10px 16px;transform:translateY(100%);transition:transform .3s
 }
-.sticky-cta.visible{transform:translateY(0)}
-.sticky-inner{display:flex;align-items:center;justify-content:space-between;max-width:480px;margin:0 auto}
-.sticky-price{font-size:.85rem;color:var(--text-muted)}
-.sticky-price strong{color:var(--white);font-size:1.05rem}
+.sticky.show{transform:translateY(0)}
+.sticky-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:480px;margin:0 auto}
+.sticky-price{font-size:.78rem;color:var(--muted)}
+.sticky-price strong{color:var(--white);font-size:.95rem}
 .sticky-btn{
-  padding:12px 24px;border-radius:100px;border:none;
+  padding:12px 24px;border:none;border-radius:8px;
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-weight:700;font-size:.85rem;cursor:pointer
+  color:var(--bg);font-weight:700;font-size:.82rem;cursor:pointer;
+  white-space:nowrap
 }
-@media(max-width:768px){.sticky-cta{display:block}}
+@media(max-width:860px){.sticky{display:block}}
 
-/* ============ DOMAIN SECTION ============ */
-.domain-section{padding:60px 20px;background:var(--bg)}
-.domain-checker{
-  max-width:480px;margin:28px auto 0;
-  display:flex;gap:8px;flex-wrap:wrap;justify-content:center
-}
-.domain-input{
-  flex:1;min-width:200px;padding:14px 16px;
-  background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
-  color:var(--white);font-size:.9rem;font-family:var(--sans);outline:none;
-  transition:border-color .2s
-}
-.domain-input:focus{border-color:var(--gold)}
-.domain-ext{
-  padding:14px 12px;background:var(--bg2);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--radius);color:var(--text-muted);font-size:.9rem;
-  font-family:var(--sans);outline:none;cursor:pointer
-}
-.domain-btn{
-  padding:14px 20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
-  border-radius:var(--radius);color:var(--gold);font-weight:600;font-size:.85rem;
-  cursor:pointer;transition:all .2s;white-space:nowrap
-}
-.domain-btn:hover{background:rgba(200,169,110,.2)}
-.domain-result{text-align:center;margin-top:16px;font-size:.85rem;min-height:24px}
-.domain-result.available{color:var(--green)}
-.domain-result.unavailable{color:var(--red)}
-.domain-result.checking{color:var(--text-dim);animation:pulse 1s infinite}
-
-/* Responsive polish */
-@media(max-width:768px){
-  .hero{min-height:auto;padding:100px 20px 60px}
-  .hero h1{font-size:2rem}
-  .hero-proof{flex-direction:column;gap:12px}
-  .pricing-card{padding:32px 24px}
-  .price-current{font-size:2.2rem}
-  .countdown-block{min-width:60px;padding:12px 8px}
-  .countdown-num{font-size:1.6rem}
-}
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.anim{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.anim.vis{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar" id="topBar">
-  <div class="top-bar-left">
-    <span class="top-bar-badge">Proposta Exclusiva</span>
-    <span class="top-bar-text">Dr. Leonello Bocchese</span>
+<!-- URGENCY BAR -->
+<div class="urgency">
+  Proposta expira em <span class="urgency-timer" id="barTimer">47:59:59</span> — depois o site sai do ar
+</div>
+
+<div class="page">
+
+<!-- ========== HERO SPLIT ========== -->
+<div class="hero">
+
+  <!-- LEFT: Site Preview -->
+  <div class="hero-left">
+    <div class="preview-label">
+      <div class="preview-dots"><span></span><span></span><span></span></div>
+      <span class="preview-url">drleonellobocchese.com.br</span>
+      <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="preview-live">
+        Abrir ao vivo
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      </a>
+    </div>
+    <div class="preview-scroll">
+      <img src="images/desktop.png" alt="Site Dr. Leonello Bocchese">
+      <div class="preview-overlay"></div>
+    </div>
   </div>
-  <div class="top-bar-timer" id="topTimer">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    <span id="topTimerText">48:00:00</span>
+
+  <!-- RIGHT: Checkout -->
+  <div class="hero-right">
+    <div class="checkout-badge">Site pronto para ativar</div>
+
+    <h1 class="checkout-title">Dr. Leonello, seu site <span>está pronto</span>.</h1>
+    <p class="checkout-sub">Criamos um site profissional exclusivo para sua clínica. Ative agora com seu domínio próprio e comece a atrair novos pacientes.</p>
+
+    <!-- Price -->
+    <div class="price-block">
+      <div class="price-promo">50% OFF — Primeiro cliente</div>
+      <div class="price-row">
+        <span class="price-old">R$ 2.000</span>
+        <span class="price-now">R$ 1.000</span>
+      </div>
+      <div class="price-period">Taxa única de ativação</div>
+      <div class="price-monthly">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        + <strong>R$ 49,90/mês</strong> (hospedagem, domínio, SSL, suporte)
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="methods">
+      <button class="method active" data-method="pix" onclick="pickMethod(this)">
+        <div class="method-radio"></div>
+        <div class="method-info">
+          <div class="method-name">PIX</div>
+          <div class="method-detail">R$ 900,00 (desconto extra de 10%)</div>
+        </div>
+        <span class="method-tag">Melhor preço</span>
+      </button>
+      <button class="method" data-method="credit_card" onclick="pickMethod(this)">
+        <div class="method-radio"></div>
+        <div class="method-info">
+          <div class="method-name">Cartão de Crédito</div>
+          <div class="method-detail">R$ 1.000,00 à vista</div>
+        </div>
+      </button>
+      <button class="method" data-method="installments" onclick="pickMethod(this)">
+        <div class="method-radio"></div>
+        <div class="method-info">
+          <div class="method-name">Até 10x no Cartão</div>
+          <div class="method-detail">10x de R$ 100,00</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- CTA -->
+    <button class="btn-pay" id="payBtn" onclick="pay()">
+      Ativar meu site agora
+      <span>Pagamento seguro via AbacatePay</span>
+    </button>
+
+    <!-- Trust -->
+    <div class="trust-line">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Pagamento seguro
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        7 dias de garantia
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+        Ativo em 24h
+      </div>
+    </div>
+
+    <!-- Included -->
+    <div class="included">
+      <div class="included-title">Incluído</div>
+      <ul class="included-list">
+        <li>14 seções exclusivas</li>
+        <li>SEO para cirurgião plástico</li>
+        <li>100% responsivo</li>
+        <li>SSL + cadeado verde</li>
+        <li>Domínio .com.br</li>
+        <li>Suporte via WhatsApp</li>
+        <li>3 rodadas de ajustes</li>
+        <li>Performance A+</li>
+      </ul>
+    </div>
   </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      Proposta Personalizada
+<!-- ========== ABAIXO DA DOBRA ========== -->
+
+<!-- Device Preview -->
+<div class="extra anim">
+  <div class="extra-center">
+    <h2>Perfeito em qualquer dispositivo</h2>
+    <p class="extra-sub">85% dos pacientes pesquisam no celular</p>
+    <div class="devices">
+      <div class="device-tabs">
+        <button class="dtab on" onclick="switchDevice('desktop',this)">Desktop</button>
+        <button class="dtab" onclick="switchDevice('tablet',this)">Tablet</button>
+        <button class="dtab" onclick="switchDevice('mobile',this)">Mobile</button>
+      </div>
     </div>
-    <h1>Seu site profissional<br>está <span>pronto</span>.</h1>
-    <p class="hero-p">Criamos um site exclusivo para sua clínica de cirurgia plástica. Design premium, otimizado para atrair pacientes que buscam excelência.</p>
-    <button class="hero-cta" onclick="document.getElementById('preview').scrollIntoView({behavior:'smooth'})">
-      Ver o resultado
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-    </button>
-    <div class="hero-proof">
-      <div class="hero-proof-item">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        4.8 no Google (200+ avaliações)
-      </div>
-      <div class="hero-proof-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        Site 100% personalizado
-      </div>
+    <div class="device-frame">
+      <img src="images/desktop.png" alt="Desktop" id="dDesktop">
+      <img src="images/tablet.png" alt="Tablet" id="dTablet" class="off">
+      <img src="images/mobile.png" alt="Mobile" id="dMobile" class="off">
     </div>
   </div>
-</section>
+</div>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-grid fade-up">
-    <div><div class="stat-num">14</div><div class="stat-label">Seções</div></div>
-    <div><div class="stat-num">100%</div><div class="stat-label">Responsivo</div></div>
-    <div><div class="stat-num">A+</div><div class="stat-label">SEO Score</div></div>
-    <div><div class="stat-num">SSL</div><div class="stat-label">Seguro</div></div>
-  </div>
-</section>
-
-<!-- PREVIEW -->
-<section class="preview" id="preview">
-  <div class="container">
-    <h2 class="section-title fade-up">Veja como ficou</h2>
-    <div class="gold-line"></div>
-    <p class="section-sub fade-up">Design exclusivo que reflete a excelência e credibilidade do seu trabalho</p>
-    <div class="preview-frame-wrap fade-up">
-      <div class="preview-toolbar">
-        <div class="preview-dot"></div>
-        <div class="preview-dot"></div>
-        <div class="preview-dot"></div>
-        <div class="preview-url">drleonellobocchese.com.br</div>
-        <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="preview-visit">Visitar ao vivo</a>
-      </div>
-      <img src="images/desktop.png" alt="Site Dr. Leonello Bocchese - Desktop" class="preview-img" id="previewDesktop">
-      <img src="images/tablet.png" alt="Site Dr. Leonello Bocchese - Tablet" class="preview-img hidden" id="previewTablet">
-      <img src="images/mobile.png" alt="Site Dr. Leonello Bocchese - Mobile" class="preview-img hidden" id="previewMobile">
+<!-- Social Proof -->
+<div class="reviews anim">
+  <div class="reviews-center">
+    <h2>Avaliações dos pacientes do Dr. Leonello</h2>
+    <div class="reviews-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="reviews-meta">4.8 de 5 — mais de 200 avaliações no Google</div>
+    <div class="review-card">
+      <div class="review-text">"Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas. Muito cuidadoso e atencioso."</div>
+      <div class="review-author">— Mariana R.</div>
     </div>
-    <div class="device-tabs">
-      <button class="device-tab active" data-device="desktop">Desktop</button>
-      <button class="device-tab" data-device="tablet">Tablet</button>
-      <button class="device-tab" data-device="mobile">Mobile</button>
+    <div class="review-card">
+      <div class="review-text">"A segurança que o Dr. Leonello transmite é incomparável. Minha lipo ficou natural e perfeita."</div>
+      <div class="review-author">— Carolina S.</div>
     </div>
   </div>
-</section>
-
-<!-- BENEFITS -->
-<section class="benefits">
-  <div class="container">
-    <h2 class="section-title fade-up">O que está incluído</h2>
-    <div class="gold-line"></div>
-    <p class="section-sub fade-up">Tudo o que um cirurgião plástico de referência precisa para consolidar sua presença digital</p>
-    <div class="benefits-grid">
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-        <h3>SEO para Cirurgia Plástica</h3>
-        <p>Otimizado para "cirurgião plástico Florianópolis", "mamoplastia SC" e termos que seus pacientes pesquisam</p>
-      </div>
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-        <h3>Mobile Impecável</h3>
-        <p>85% dos pacientes pesquisam no celular. Seu site é perfeito em qualquer dispositivo</p>
-      </div>
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-        <h3>SSL e Segurança</h3>
-        <p>Certificado de segurança profissional. Transmite confiança aos pacientes desde o primeiro acesso</p>
-      </div>
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Domínio Profissional</h3>
-        <p>Seu endereço próprio na internet: drleonellobocchese.com.br — credibilidade real</p>
-      </div>
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3>Suporte Dedicado</h3>
-        <p>Alterações, atualizações e ajustes via WhatsApp. Sem burocracia, sem espera</p>
-      </div>
-      <div class="benefit fade-up">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg></div>
-        <h3>Performance A+</h3>
-        <p>Carregamento ultra-rápido. Google prioriza sites rápidos nos resultados de busca</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DOMAIN -->
-<section class="domain-section">
-  <div class="container">
-    <h2 class="section-title fade-up">Escolha seu domínio</h2>
-    <div class="gold-line"></div>
-    <p class="section-sub fade-up">O endereço profissional do seu consultório na internet</p>
-    <div class="domain-checker fade-up">
-      <input type="text" class="domain-input" id="domainInput" placeholder="drleonellobocchese" autocomplete="off" spellcheck="false">
-      <select class="domain-ext" id="domainExt">
-        <option value=".com.br">.com.br</option>
-        <option value=".com">.com</option>
-        <option value=".med.br">.med.br</option>
-      </select>
-      <button class="domain-btn" id="domainBtn" onclick="checkDomain()">Verificar</button>
-    </div>
-    <div class="domain-result" id="domainResult"></div>
-  </div>
-</section>
-
-<!-- INVESTMENT -->
-<section class="investment" id="investimento">
-  <div class="container">
-    <h2 class="section-title fade-up">Investimento</h2>
-    <div class="gold-line"></div>
-    <p class="section-sub fade-up">Um investimento em credibilidade profissional que se paga no primeiro paciente</p>
-
-    <div class="pricing-card fade-up">
-      <div class="pricing-badge">50% OFF — Lançamento</div>
-
-      <div class="price-row">
-        <span class="price-original">R$ 2.000</span>
-        <span class="price-current">R$ 1.000</span>
-      </div>
-      <div class="price-label">Taxa única de criação + ativação</div>
-
-      <div class="payment-options">
-        <div class="payment-opt selected" data-method="pix" onclick="selectPayment(this)">
-          <div class="payment-radio"></div>
-          <div class="payment-info">
-            <div class="payment-method">PIX</div>
-            <div class="payment-value">R$ 900,00 (10% extra de desconto)</div>
-          </div>
-          <span class="payment-tag">Melhor preço</span>
-        </div>
-        <div class="payment-opt" data-method="credit_card" onclick="selectPayment(this)">
-          <div class="payment-radio"></div>
-          <div class="payment-info">
-            <div class="payment-method">Cartão de Crédito</div>
-            <div class="payment-value">R$ 1.000,00 à vista</div>
-          </div>
-        </div>
-        <div class="payment-opt" data-method="installments" onclick="selectPayment(this)">
-          <div class="payment-radio"></div>
-          <div class="payment-info">
-            <div class="payment-method">Parcelado</div>
-            <div class="payment-value">Até 10x de R$ 100,00</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="monthly-note">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-        <span>Mensal: <strong>R$ 49,90/mês</strong> (hospedagem + domínio + SSL + suporte)</span>
-      </div>
-
-      <button class="btn-pay" id="payBtn" onclick="initPayment()">
-        Ativar meu site profissional
-        <span class="btn-pay-sub">Pagamento 100% seguro via AbacatePay</span>
-      </button>
-
-      <div class="guarantee">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Garantia de 7 dias ou seu dinheiro de volta
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COUNTDOWN -->
-<section class="countdown-section">
-  <div class="countdown-wrap">
-    <h2 class="section-title fade-up">Esta proposta expira em</h2>
-    <div class="gold-line"></div>
-    <div class="countdown-grid fade-up" id="countdown">
-      <div class="countdown-block"><div class="countdown-num" id="cdHours">48</div><div class="countdown-label">Horas</div></div>
-      <div class="countdown-block"><div class="countdown-num" id="cdMinutes">00</div><div class="countdown-label">Minutos</div></div>
-      <div class="countdown-block"><div class="countdown-num" id="cdSeconds">00</div><div class="countdown-label">Segundos</div></div>
-    </div>
-    <p class="countdown-msg fade-up">Após este prazo, o site e o <strong>desconto de 50%</strong> serão removidos.</p>
-  </div>
-</section>
-
-<!-- TRUST -->
-<section class="trust">
-  <div class="trust-grid fade-up">
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-      <div class="trust-text">Pagamento<br>100% seguro</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
-      <div class="trust-text">SSL incluso<br>(cadeado verde)</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="trust-text">Garantia<br>7 dias</div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-      <div class="trust-text">Suporte<br>via WhatsApp</div>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- FAQ -->
-<section class="faq">
-  <div class="container">
-    <h2 class="section-title fade-up">Perguntas frequentes</h2>
-    <div class="gold-line"></div>
-    <div class="faq-list">
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Preciso fazer alguma coisa técnica?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Absolutamente nada. Nós cuidamos de tudo: domínio, hospedagem, SSL, configuração e publicação. Você só precisa aprovar e escolher seu domínio.</div></div>
-      </div>
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          O que está incluído na mensalidade?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Hospedagem profissional, certificado SSL (cadeado de segurança), domínio .com.br, suporte via WhatsApp e atualizações de segurança. Tudo para manter seu site no ar com excelência.</div></div>
-      </div>
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Quanto tempo para o site ficar no ar?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Após a confirmação do pagamento, seu site estará online em até 24 horas com o domínio que você escolher. Enquanto isso, o preview já está acessível.</div></div>
-      </div>
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Posso solicitar alterações no site?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. Após a ativação, você tem direito a 3 rodadas de ajustes inclusos. Alterações de texto, imagens, cores ou qualquer detalhe que deseje refinar.</div></div>
-      </div>
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          E se eu não ficar satisfeito?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Você tem 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do valor investido. Sem perguntas, sem burocracia.</div></div>
-      </div>
-      <div class="faq-item fade-up">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Posso cancelar a mensalidade?
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Sim, a qualquer momento. Sem multa, sem fidelidade. Basta avisar com 30 dias de antecedência. Mas acreditamos que os resultados vão falar por si.</div></div>
-      </div>
+<div class="faq anim">
+  <div class="faq-center">
+    <h2>Dúvidas rápidas</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="togFaq(this)">Preciso fazer alguma coisa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>Nada. Nós cuidamos de tudo: domínio, hospedagem, SSL, publicação. Você só aprova.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="togFaq(this)">E se eu não gostar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>7 dias de garantia incondicional. Devolvemos 100% do valor, sem perguntas.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="togFaq(this)">Quanto tempo para ficar no ar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>Após o pagamento, seu site fica online em até 24 horas com o domínio que escolher.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="togFaq(this)">Posso pedir alterações?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>Sim, 3 rodadas de ajustes inclusos. Texto, imagens, cores — o que precisar.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="togFaq(this)">Posso cancelar a mensalidade?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>Sim, sem multa, sem fidelidade. Avise com 30 dias de antecedência.</p></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <h2 class="fade-up">Pronto para dar o próximo passo?</h2>
-  <p class="fade-up">Seu site já está criado. Falta apenas um clique para colocá-lo no ar e começar a atrair novos pacientes.</p>
-  <button class="hero-cta fade-up" onclick="document.getElementById('investimento').scrollIntoView({behavior:'smooth'})">
-    Ativar meu site agora
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+<!-- Final CTA -->
+<div class="final anim">
+  <h2 style="font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px">Pronto para ativar?</h2>
+  <p style="color:var(--dim);font-size:.85rem;margin-bottom:20px">Seu site já existe. Falta um clique.</p>
+  <button class="btn-pay" onclick="scrollTop()">
+    Ativar meu site — R$ 900 no PIX
+    <span>ou 10x de R$ 100 no cartão</span>
   </button>
-</section>
+  <div class="trust-line" style="margin-top:12px">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Garantia 7 dias
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Pagamento seguro
+    </div>
+  </div>
+</div>
 
-<!-- FOOTER -->
 <footer>
-  <p>Proposta exclusiva e intransferível para Dr. Leonello Bocchese — Cirurgião Plástico</p>
-  <p style="margin-top:8px;opacity:.6">Válida por 48 horas a partir do envio</p>
+  Proposta exclusiva para Dr. Leonello Bocchese — válida por 48h
 </footer>
 
-<!-- STICKY CTA -->
-<div class="sticky-cta" id="stickyCta">
+</div><!-- .page -->
+
+<!-- MOBILE STICKY -->
+<div class="sticky" id="sticky">
   <div class="sticky-inner">
-    <div class="sticky-price">A partir de <strong>R$ 900</strong></div>
-    <button class="sticky-btn" onclick="document.getElementById('investimento').scrollIntoView({behavior:'smooth'})">Ativar site</button>
+    <div class="sticky-price">PIX <strong>R$ 900</strong></div>
+    <button class="sticky-btn" onclick="scrollTop()">Ativar site</button>
   </div>
 </div>
 
 <script>
-// ============ CONFIG ============
-const CHECKOUT_TOKEN = 'b8b10e9e-80d2-424f-86b9-403b9c85e7f6';
-const API_BASE = ''; // Railway URL — will be configured
-const CREATED_AT = new Date().toISOString();
-const EXPIRES_HOURS = 48;
+// Config
+const TOKEN='b8b10e9e-80d2-424f-86b9-403b9c85e7f6';
+const API=''; // Railway URL
+const EXPIRE=Date.now()+48*3600000;
+let method='pix';
 
-// ============ COUNTDOWN ============
-const endDate = new Date(Date.now() + EXPIRES_HOURS * 60 * 60 * 1000);
-
-function updateCountdown() {
-  const now = new Date();
-  const diff = endDate - now;
-  if (diff <= 0) {
-    document.getElementById('cdHours').textContent = '00';
-    document.getElementById('cdMinutes').textContent = '00';
-    document.getElementById('cdSeconds').textContent = '00';
-    document.getElementById('topTimerText').textContent = 'Expirado';
-    document.getElementById('payBtn').disabled = true;
-    document.getElementById('payBtn').textContent = 'Proposta expirada';
-    return;
-  }
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cdHours').textContent = h.toString().padStart(2, '0');
-  document.getElementById('cdMinutes').textContent = m.toString().padStart(2, '0');
-  document.getElementById('cdSeconds').textContent = s.toString().padStart(2, '0');
-  document.getElementById('topTimerText').textContent = `${h}h ${m.toString().padStart(2,'0')}m ${s.toString().padStart(2,'0')}s`;
+// Countdown
+function tick(){
+  const d=EXPIRE-Date.now();
+  if(d<=0){document.getElementById('barTimer').textContent='EXPIRADO';document.getElementById('payBtn').disabled=true;return}
+  const h=Math.floor(d/3.6e6),m=Math.floor(d%3.6e6/6e4),s=Math.floor(d%6e4/1e3);
+  document.getElementById('barTimer').textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
+setInterval(tick,1000);tick();
 
-// ============ SCROLL EFFECTS ============
-const topBar = document.getElementById('topBar');
-const stickyCta = document.getElementById('stickyCta');
-let lastScroll = 0;
+// Scroll
+const sticky=document.getElementById('sticky');
+window.addEventListener('scroll',()=>{sticky.classList.toggle('show',scrollY>500)});
 
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  topBar.classList.toggle('scrolled', y > 60);
-  stickyCta.classList.toggle('visible', y > 600);
-  lastScroll = y;
-});
+// Intersection observer for animations
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.anim').forEach(e=>io.observe(e));
 
-// ============ FADE-UP OBSERVER ============
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }});
-}, { threshold: 0.15, rootMargin: '-40px' });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-// ============ DEVICE PREVIEW ============
-document.querySelectorAll('.device-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.device-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const device = tab.dataset.device;
-    document.querySelectorAll('.preview-img').forEach(img => img.classList.add('hidden'));
-    document.getElementById('preview' + device.charAt(0).toUpperCase() + device.slice(1)).classList.remove('hidden');
-  });
-});
-
-// ============ PAYMENT SELECTION ============
-let selectedMethod = 'pix';
-
-function selectPayment(el) {
-  document.querySelectorAll('.payment-opt').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedMethod = el.dataset.method;
+// Payment method
+function pickMethod(el){
+  document.querySelectorAll('.method').forEach(m=>m.classList.remove('active'));
+  el.classList.add('active');method=el.dataset.method;
 }
 
-// ============ DOMAIN CHECK ============
-async function checkDomain() {
-  const input = document.getElementById('domainInput').value.trim().toLowerCase();
-  const ext = document.getElementById('domainExt').value;
-  const result = document.getElementById('domainResult');
-  if (!input) { result.textContent = 'Digite um domínio'; result.className = 'domain-result unavailable'; return; }
-  const domain = input.replace(/[^a-z0-9-]/g, '') + ext;
-  result.textContent = 'Verificando ' + domain + '...';
-  result.className = 'domain-result checking';
-  if (API_BASE) {
-    try {
-      const res = await fetch(`${API_BASE}/api/checkout/${CHECKOUT_TOKEN}/validate-domain`, {
-        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({domain})
+// Device switch
+function switchDevice(d,btn){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');
+  ['Desktop','Tablet','Mobile'].forEach(n=>document.getElementById('d'+n).classList.toggle('off',n.toLowerCase()!==d));
+}
+
+// FAQ
+function togFaq(btn){
+  const item=btn.parentElement,open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+// Scroll top
+function scrollTop(){document.querySelector('.hero-right').scrollIntoView({behavior:'smooth'})}
+
+// Payment
+async function pay(){
+  const btn=document.getElementById('payBtn');
+  btn.disabled=true;btn.textContent='Processando...';
+  if(API){
+    try{
+      const r=await fetch(`${API}/api/checkout/${TOKEN}/create-billing`,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({payment_method:method,domain:'drleonellobocchese.com.br',installments:method==='installments'?10:1})
       });
-      const data = await res.json();
-      if (data.available) {
-        result.innerHTML = '&#10003; ' + domain + ' está disponível!';
-        result.className = 'domain-result available';
-      } else {
-        result.innerHTML = '&#10007; ' + domain + ' já está registrado. Tente outro.';
-        result.className = 'domain-result unavailable';
-      }
-    } catch {
-      result.textContent = 'Erro ao verificar. Tente novamente.';
-      result.className = 'domain-result unavailable';
+      const d=await r.json();
+      if(d.checkout_url)return window.location.href=d.checkout_url;
+      throw new Error(d.error||'Erro');
+    }catch(e){
+      btn.disabled=false;btn.innerHTML='Ativar meu site agora<span>Pagamento seguro via AbacatePay</span>';
     }
-  } else {
-    // Sem API configurada — simular para teste
-    setTimeout(() => {
-      result.innerHTML = '&#10003; ' + domain + ' está disponível!';
-      result.className = 'domain-result available';
-    }, 1200);
+  }else{
+    setTimeout(()=>{
+      btn.disabled=false;btn.innerHTML='Ativar meu site agora<span>Pagamento seguro via AbacatePay</span>';
+      alert('Modo teste — Configure API_BASE para ativar pagamentos');
+    },1500);
   }
-}
-
-// ============ PAYMENT ============
-async function initPayment() {
-  const btn = document.getElementById('payBtn');
-  const domain = (document.getElementById('domainInput').value.trim() || 'drleonellobocchese') +
-                 document.getElementById('domainExt').value;
-  btn.disabled = true;
-  btn.innerHTML = 'Processando...<span class="btn-pay-sub">Aguarde, estamos preparando seu pagamento</span>';
-
-  if (API_BASE) {
-    try {
-      const res = await fetch(`${API_BASE}/api/checkout/${CHECKOUT_TOKEN}/create-billing`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          payment_method: selectedMethod,
-          domain: domain,
-          installments: selectedMethod === 'installments' ? 10 : 1
-        })
-      });
-      const data = await res.json();
-      if (data.checkout_url) {
-        window.location.href = data.checkout_url;
-      } else if (data.error) {
-        btn.disabled = false;
-        btn.innerHTML = 'Ativar meu site profissional<span class="btn-pay-sub">Pagamento 100% seguro via AbacatePay</span>';
-        alert('Erro: ' + data.error);
-      }
-    } catch (e) {
-      btn.disabled = false;
-      btn.innerHTML = 'Ativar meu site profissional<span class="btn-pay-sub">Pagamento 100% seguro via AbacatePay</span>';
-      alert('Erro de conexão. Tente novamente.');
-    }
-  } else {
-    // Sem API — mostrar mensagem de teste
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = 'Ativar meu site profissional<span class="btn-pay-sub">Pagamento 100% seguro via AbacatePay</span>';
-      alert('Modo teste: API_BASE não configurada. Configure a URL do Railway para ativar pagamentos.');
-    }, 1500);
-  }
-}
-
-// ============ FAQ ============
-function toggleFaq(btn) {
-  const item = btn.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
 }
 </script>
 </body>

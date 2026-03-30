@@ -243,12 +243,6 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
     </a>
 
-    <!-- Warn -->
-    <div class="warn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      Site sera deletado permanentemente em 48h sem ativacao.
-    </div>
-
     <!-- Price -->
     <div class="price">
       <del>R$ 2.997</del>
@@ -258,6 +252,25 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
     <div class="price-note">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
       Zero mensalidade. Tudo incluso.
+    </div>
+
+    <!-- Domain -->
+    <div class="domain" style="margin-bottom:14px">
+      <div class="domain-label">Seu dominio (incluso)</div>
+      <div class="domain-row">
+        <div class="domain-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" spellcheck="false">
+          <select class="domain-ext" id="domainExt">
+            <option value=".com.br">.com.br</option>
+            <option value=".med.br">.med.br</option>
+            <option value=".com">.com</option>
+            <option value=".srv.br">.srv.br</option>
+          </select>
+        </div>
+        <button class="domain-btn" id="domainBtn" onclick="checkDomain()">Verificar</button>
+      </div>
+      <div class="domain-status" id="domainStatus"></div>
     </div>
 
     <!-- Methods — compact tabs -->
@@ -302,27 +315,6 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
 </div>
 
 <!-- ===== BELOW FOLD ===== -->
-
-<!-- Domain -->
-<div class="section anim">
-  <div class="wrap">
-    <div class="domain-label">Escolha seu dominio (incluso)</div>
-    <div class="domain-row">
-      <div class="domain-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" spellcheck="false">
-        <select class="domain-ext" id="domainExt">
-          <option value=".com.br">.com.br</option>
-          <option value=".med.br">.med.br</option>
-          <option value=".com">.com</option>
-          <option value=".srv.br">.srv.br</option>
-        </select>
-      </div>
-      <button class="domain-btn" id="domainBtn" onclick="checkDomain()">Verificar</button>
-    </div>
-    <div class="domain-status" id="domainStatus"></div>
-  </div>
-</div>
 
 <!-- Credentials + Preview -->
 <div class="section anim">

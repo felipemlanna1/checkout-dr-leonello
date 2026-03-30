@@ -274,6 +274,15 @@ footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
       <div class="domain-status" id="domainStatus"></div>
     </div>
 
+    <!-- CPF -->
+    <div class="domain" style="margin-bottom:14px">
+      <div class="domain-label">CPF ou CNPJ (para nota fiscal)</div>
+      <div class="domain-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input type="text" id="cpfInput" class="domain-input" placeholder="000.000.000-00" maxlength="18" oninput="fmtCpf(this)" inputmode="numeric" style="font-family:var(--sans)">
+      </div>
+    </div>
+
     <!-- Methods — compact tabs -->
     <div class="methods">
       <button class="mt on" data-m="pix" onclick="pick(this)">
@@ -390,6 +399,15 @@ function fmtCard(el){
   let v=el.value.replace(/\D/g,'').slice(0,16);
   el.value=v.replace(/(\d{4})(?=\d)/g,'$1 ');
 }
+function fmtCpf(el){
+  let v=el.value.replace(/\D/g,'');
+  if(v.length<=11){
+    v=v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+  }else{
+    v=v.slice(0,14).replace(/(\d{2})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1/$2').replace(/(\d{4})(\d{1,2})$/,'$1-$2');
+  }
+  el.value=v;
+}
 function fmtExp(el){
   let v=el.value.replace(/\D/g,'').slice(0,4);
   if(v.length>=3)v=v.slice(0,2)+'/'+v.slice(2);
@@ -439,11 +457,16 @@ async function pay(){
   const btn=document.getElementById('payBtn');
   btn.disabled=true;btn.textContent='Processando...';
   const dom=document.getElementById('domainInput').value.trim()+document.getElementById('domainExt').value;
+  const cpf=document.getElementById('cpfInput').value.trim();
+  if(!cpf||cpf.replace(/\D/g,'').length<11){
+    btn.disabled=false;btn.innerHTML='Ativar meu site agora<small>Pagamento 100% seguro — ativo em ate 24h</small>';
+    document.getElementById('cpfInput').focus();return;
+  }
   if(API){
     try{
       const r=await fetch(API+'/api/checkout/'+TOKEN+'/create-billing',{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({payment_method:method,domain:dom,amount:method==='pix'?129700:149700,installments:method==='installments'?10:1,cf_token:cfToken})
+        body:JSON.stringify({payment_method:method,domain:dom,cpf:cpf,installments:method==='installments'?10:1,cf_token:cfToken})
       });
       const d=await r.json();
       if(d.checkout_url)return window.location.href=d.checkout_url;

@@ -17,324 +17,314 @@
   --white:#fafafa;--green:#22c55e;--red:#ef4444;
   --cta:#16a34a;--cta-hover:#15803d;
   --sans:'Inter',-apple-system,sans-serif;
-  --r:12px;
+  --r:10px;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
 img{max-width:100%;display:block}
 
-/* ========== URGENCY BAR ========== */
+/* Urgency */
 .urgency{
   position:fixed;top:0;left:0;right:0;z-index:100;
   background:linear-gradient(90deg,#b91c1c,#dc2626,#b91c1c);
-  color:white;text-align:center;padding:10px 16px;
-  font-size:.78rem;font-weight:600;letter-spacing:.02em;
+  color:white;text-align:center;padding:9px 16px;
+  font-size:.75rem;font-weight:600;
   display:flex;align-items:center;justify-content:center;gap:8px
 }
-.urgency-timer{
+.urgency b{
   font-variant-numeric:tabular-nums;
-  background:rgba(0,0,0,.3);padding:3px 10px;border-radius:4px;font-weight:700
+  background:rgba(0,0,0,.3);padding:2px 8px;border-radius:4px
 }
 
-.page{padding:52px 0 0}
+/* Layout */
+.page{padding:46px 0 0}
+.wrap{max-width:520px;margin:0 auto;padding:0 20px}
 
-/* ========== HERO SPLIT ========== */
-.hero{
-  display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 52px);
-  gap:0;position:relative
-}
+/* ===== ABOVE THE FOLD ===== */
+.top{padding:20px 0 0}
 
-/* MOBILE FIRST: checkout comes first */
-@media(max-width:860px){
-  .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-right{order:-1}
-}
-
-/* Preview */
-.hero-left{
-  background:var(--bg2);position:relative;overflow:hidden;
-  display:flex;flex-direction:column;
-  border-right:1px solid rgba(255,255,255,.04)
-}
-.preview-bar{
-  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg3);border-bottom:1px solid rgba(255,255,255,.06);
-  font-size:.72rem;color:var(--dim)
-}
-.preview-dots{display:flex;gap:6px}
-.preview-dots span{width:8px;height:8px;border-radius:50%}
-.preview-dots span:nth-child(1){background:#ef4444}
-.preview-dots span:nth-child(2){background:#eab308}
-.preview-dots span:nth-child(3){background:#22c55e}
-.preview-url{
-  background:rgba(255,255,255,.05);padding:4px 12px;border-radius:4px;
-  font-family:monospace;font-size:.7rem
-}
-.preview-live{
-  color:var(--gold);font-weight:600;font-size:.7rem;text-decoration:none;
-  display:flex;align-items:center;gap:4px
-}
-.preview-live:hover{text-decoration:underline}
-.preview-scroll{
-  flex:1;overflow-y:auto;overflow-x:hidden;position:relative;
-  max-height:calc(100vh - 100px)
-}
-.preview-scroll img{width:100%;display:block}
-.preview-fade{
-  position:absolute;bottom:0;left:0;right:0;height:100px;
-  background:linear-gradient(transparent,var(--bg2));pointer-events:none
-}
-@media(max-width:860px){
-  .hero-left{max-height:40vh}
-  .preview-scroll{max-height:34vh}
-}
-
-/* Checkout */
-.hero-right{
-  display:flex;flex-direction:column;justify-content:flex-start;
-  padding:32px 32px 40px;background:var(--bg)
-}
-@media(min-width:861px){
-  .hero-right{padding:32px 48px 40px;overflow-y:auto}
-}
-
-/* Badge */
 .badge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--green);margin-bottom:14px
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--green);margin-bottom:10px
 }
-.badge::before{
-  content:'';width:6px;height:6px;border-radius:50%;background:var(--green);
-  animation:pulse 1.5s infinite
-}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* Title */
-.title{
-  font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;color:var(--white);
-  line-height:1.2;margin-bottom:6px;letter-spacing:-.03em
-}
-.title em{color:var(--gold);font-style:normal}
+h1{font-size:1.4rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:4px;letter-spacing:-.02em}
+h1 em{color:var(--gold);font-style:normal}
+.sub{color:var(--muted);font-size:.8rem;margin-bottom:12px}
 
-/* Subtitle — personalized */
-.sub{color:var(--muted);font-size:.85rem;margin-bottom:10px;line-height:1.6}
-.credentials{
-  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px
-}
-.cred{
-  font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
-  padding:4px 8px;border-radius:4px;
-  background:rgba(200,169,110,.08);color:var(--gold);border:1px solid rgba(200,169,110,.12)
-}
-
-/* Deletion Warning */
+/* Warn */
 .warn{
-  background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);
-  border-radius:8px;padding:12px 14px;margin-bottom:18px;
-  display:flex;align-items:flex-start;gap:10px;color:#ef4444
+  background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);
+  border-radius:8px;padding:10px 12px;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;font-size:.72rem;color:#f87171
 }
-.warn svg{flex-shrink:0;margin-top:1px}
-.warn strong{display:block;font-size:.78rem;font-weight:700;margin-bottom:2px}
-.warn span{font-size:.72rem;color:var(--muted);line-height:1.5}
+.warn svg{flex-shrink:0}
 
-/* Price */
-.price-block{
-  background:var(--bg2);border:1px solid rgba(200,169,110,.15);
-  border-radius:var(--r);padding:20px 22px;margin-bottom:16px
+/* Price row — compact */
+.price{
+  display:flex;align-items:baseline;gap:8px;margin-bottom:2px
 }
-.price-tag{
-  display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.08em;background:var(--gold);color:var(--bg);
-  padding:4px 10px;border-radius:4px;margin-bottom:10px
+.price del{font-size:.9rem;color:var(--dim)}
+.price strong{font-size:1.8rem;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.price-sub{font-size:.72rem;color:var(--muted);margin-bottom:4px}
+.price-note{font-size:.7rem;color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:4px}
+.price-note svg{width:13px;height:13px;flex-shrink:0}
+
+/* Methods — compact row */
+.methods{display:flex;gap:6px;margin-bottom:12px}
+.mt{
+  flex:1;padding:10px 8px;border-radius:8px;
+  border:1.5px solid rgba(255,255,255,.08);background:transparent;
+  cursor:pointer;text-align:center;font-family:var(--sans);color:var(--text);
+  transition:all .15s
 }
-.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-.price-old{font-size:1rem;color:var(--dim);text-decoration:line-through}
-.price-now{font-size:2.2rem;font-weight:800;color:var(--white);letter-spacing:-.03em}
-.price-desc{font-size:.78rem;color:var(--muted)}
-.price-note{
-  margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);
-  font-size:.75rem;color:var(--dim);display:flex;align-items:center;gap:6px
+.mt:hover{border-color:rgba(200,169,110,.2)}
+.mt.on{border-color:var(--gold);background:rgba(200,169,110,.06)}
+.mt-name{font-size:.72rem;font-weight:600;color:var(--white)}
+.mt-val{font-size:.62rem;color:var(--muted);margin-top:2px}
+.mt-tag{
+  display:inline-block;font-size:.5rem;font-weight:700;text-transform:uppercase;
+  background:rgba(34,197,94,.12);color:var(--green);padding:2px 5px;border-radius:3px;
+  margin-top:4px
 }
-.price-note svg{color:var(--green);flex-shrink:0}
-.price-note strong{color:var(--gold)}
+
+/* Card fields */
+.card-fields{
+  display:none;gap:8px;margin-bottom:12px;
+  flex-wrap:wrap
+}
+.card-fields.show{display:flex}
+.card-field{
+  flex:1;min-width:120px;background:var(--bg2);border:1.5px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:10px 12px;color:var(--white);font-family:var(--sans);
+  font-size:.82rem;outline:none;transition:border-color .15s
+}
+.card-field:focus{border-color:var(--gold)}
+.card-field::placeholder{color:var(--dim)}
+.card-row{display:flex;gap:8px;width:100%}
+.card-row .card-field{min-width:0}
+
+/* CTA */
+.btn{
+  width:100%;padding:16px;border:none;border-radius:var(--r);
+  background:var(--cta);color:white;font-size:.95rem;font-weight:700;
+  cursor:pointer;transition:all .2s;line-height:1.3
+}
+.btn:hover{background:var(--cta-hover);box-shadow:0 4px 16px rgba(22,163,74,.3);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn small{display:block;font-size:.66rem;font-weight:400;opacity:.8;margin-top:2px}
+
+/* Trust */
+.trust{
+  display:flex;justify-content:center;gap:14px;
+  font-size:.65rem;color:var(--dim);margin:10px 0 0
+}
+.trust span{display:flex;align-items:center;gap:3px}
+.trust svg{width:11px;height:11px;color:var(--green)}
+
+/* ===== BELOW FOLD ===== */
+.section{padding:36px 0;border-top:1px solid rgba(255,255,255,.04)}
 
 /* Domain */
-.domain{margin-bottom:16px}
-.domain-label{display:block;font-size:.72rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.domain-label{font-size:.7rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.domain-row{display:flex;gap:8px;align-items:center}
 .domain-wrap{
-  display:flex;align-items:center;gap:8px;
+  flex:1;display:flex;align-items:center;gap:6px;
   background:var(--bg2);border:1.5px solid rgba(255,255,255,.08);
-  border-radius:8px;padding:10px 14px;transition:border-color .15s
+  border-radius:8px;padding:9px 12px;transition:border-color .15s
 }
 .domain-wrap:focus-within{border-color:var(--gold)}
 .domain-wrap svg{color:var(--dim);flex-shrink:0}
 .domain-input{
   flex:1;background:none;border:none;outline:none;
-  color:var(--white);font-family:monospace;font-size:.85rem;min-width:0
+  color:var(--white);font-family:monospace;font-size:.82rem;min-width:0
 }
-.domain-input::placeholder{color:var(--dim)}
-.domain-ext{color:var(--muted);font-family:monospace;font-size:.85rem;flex-shrink:0}
-.domain-ok{
-  display:flex;align-items:center;gap:5px;
-  margin-top:5px;font-size:.68rem;color:var(--green)
+.domain-ext{color:var(--muted);font-family:monospace;font-size:.82rem;flex-shrink:0}
+.domain-btn{
+  padding:9px 16px;border:none;border-radius:8px;
+  background:var(--bg3);color:var(--gold);font-size:.72rem;font-weight:600;
+  cursor:pointer;font-family:var(--sans);white-space:nowrap;
+  border:1px solid rgba(200,169,110,.2);transition:all .15s
+}
+.domain-btn:hover{background:rgba(200,169,110,.1)}
+.domain-status{margin-top:5px;font-size:.66rem;min-height:16px}
+.domain-status.ok{color:var(--green)}
+.domain-status.fail{color:var(--red)}
+.domain-status.loading{color:var(--muted)}
+
+/* Credentials */
+.creds{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.cred{
+  font-size:.58rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
+  padding:3px 7px;border-radius:4px;
+  background:rgba(200,169,110,.08);color:var(--gold);border:1px solid rgba(200,169,110,.12)
 }
 
-/* Methods */
-.methods{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.method{
-  display:flex;align-items:center;gap:10px;padding:11px 14px;
-  border-radius:8px;border:1.5px solid rgba(255,255,255,.08);
-  background:transparent;cursor:pointer;transition:all .15s;
-  font-family:var(--sans);text-align:left;color:var(--text);width:100%
+/* Preview */
+.preview{
+  border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);margin-top:16px
 }
-.method:hover{border-color:rgba(200,169,110,.25);background:rgba(200,169,110,.03)}
-.method.active{border-color:var(--gold);background:rgba(200,169,110,.06)}
-.method-dot{
-  width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.2);
-  flex-shrink:0;position:relative;transition:all .15s
+.preview-bar{
+  padding:8px 14px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg3);font-size:.65rem;color:var(--dim)
 }
-.method.active .method-dot{border-color:var(--gold)}
-.method.active .method-dot::after{
-  content:'';position:absolute;inset:3px;border-radius:50%;background:var(--gold)
+.preview-dots{display:flex;gap:5px}
+.preview-dots span{width:7px;height:7px;border-radius:50%}
+.preview-dots span:nth-child(1){background:#ef4444}
+.preview-dots span:nth-child(2){background:#eab308}
+.preview-dots span:nth-child(3){background:#22c55e}
+.preview-link{
+  color:var(--gold);font-weight:600;font-size:.65rem;text-decoration:none;
+  display:flex;align-items:center;gap:3px
 }
-.method-info{flex:1}
-.method-name{font-size:.8rem;font-weight:600;color:var(--white)}
-.method-detail{font-size:.7rem;color:var(--muted);margin-top:1px}
-.method-badge{
-  font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  background:rgba(34,197,94,.12);color:var(--green);padding:3px 7px;border-radius:3px;
-  white-space:nowrap
+.preview-link:hover{text-decoration:underline}
+.preview-img{max-height:300px;overflow:hidden;position:relative}
+.preview-img img{width:100%}
+.preview-img::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:80px;
+  background:linear-gradient(transparent,var(--bg))
 }
-
-/* CTA — GREEN for action */
-.btn-cta{
-  width:100%;padding:18px 16px;border:none;border-radius:var(--r);
-  background:var(--cta);color:white;font-size:1rem;font-weight:700;
-  cursor:pointer;transition:all .2s;margin-bottom:10px;line-height:1.4
-}
-.btn-cta:hover{background:var(--cta-hover);box-shadow:0 6px 24px rgba(22,163,74,.3);transform:translateY(-1px)}
-.btn-cta:active{transform:translateY(0)}
-.btn-cta:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-cta small{display:block;font-size:.7rem;font-weight:400;opacity:.8;margin-top:3px}
-
-/* Trust */
-.trust{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:14px;
-  font-size:.68rem;color:var(--dim);margin-bottom:20px
-}
-.trust-i{display:flex;align-items:center;gap:4px}
-.trust-i svg{width:12px;height:12px;color:var(--green)}
 
 /* Included */
-.included-title{font-size:.72rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.included-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.included-list li{
-  font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:6px
-}
-.included-list li::before{
-  content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0
-}
-
-/* ========== BELOW FOLD ========== */
-.section{padding:48px 20px;border-top:1px solid rgba(255,255,255,.04)}
-.section-center{max-width:700px;margin:0 auto}
-.section h2{font-size:1.2rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:6px}
-.section-sub{text-align:center;color:var(--dim);font-size:.82rem;margin-bottom:28px}
-
+.inc{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.inc li{font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:5px}
+.inc li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
 /* Reviews */
-.reviews-bg{background:var(--bg2)}
-.reviews-center{max-width:600px;margin:0 auto;text-align:center}
-.stars{color:var(--gold);font-size:1.1rem;margin-bottom:4px}
-.reviews-meta{font-size:.75rem;color:var(--dim);margin-bottom:20px}
 .review{
-  background:var(--bg);border:1px solid rgba(255,255,255,.04);
-  border-radius:var(--r);padding:18px;text-align:left;margin-bottom:10px
+  background:var(--bg2);border:1px solid rgba(255,255,255,.04);
+  border-radius:var(--r);padding:14px;margin-bottom:8px
 }
-.review q{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;display:block;margin-bottom:6px}
-.review cite{font-size:.72rem;color:var(--dim);font-weight:600;font-style:normal}
+.review q{font-size:.78rem;color:var(--muted);font-style:italic;line-height:1.5;display:block;margin-bottom:4px}
+.review cite{font-size:.68rem;color:var(--dim);font-style:normal;font-weight:600}
 
 /* FAQ */
 .faq-item{border-bottom:1px solid rgba(255,255,255,.05)}
 .faq-q{
-  width:100%;padding:12px 0;display:flex;align-items:center;justify-content:space-between;
-  background:none;border:none;color:var(--white);font-size:.82rem;font-weight:500;
-  cursor:pointer;text-align:left;font-family:var(--sans);gap:12px
+  width:100%;padding:10px 0;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;color:var(--white);font-size:.78rem;font-weight:500;
+  cursor:pointer;text-align:left;font-family:var(--sans);gap:10px
 }
-.faq-q svg{width:14px;height:14px;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-q svg{width:13px;height:13px;color:var(--gold);flex-shrink:0;transition:transform .3s}
 .faq-item.open .faq-q svg{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.faq-item.open .faq-a{max-height:160px}
-.faq-a p{padding:0 0 12px;font-size:.78rem;color:var(--muted);line-height:1.6}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
+.faq-item.open .faq-a{max-height:140px}
+.faq-a p{padding:0 0 10px;font-size:.72rem;color:var(--muted);line-height:1.5}
 
-/* Final CTA */
-.final{
-  padding:48px 20px;text-align:center;
-  background:linear-gradient(180deg,var(--bg),var(--bg2))
-}
-.final .btn-cta{max-width:420px;margin:0 auto 10px}
+/* Final */
+.final{padding:36px 0;text-align:center;background:linear-gradient(var(--bg),var(--bg2))}
+.final .btn{max-width:400px;margin:0 auto}
 
-footer{padding:20px;text-align:center;font-size:.62rem;color:var(--dim)}
-
-/* Mobile sticky */
-.sticky{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
-  background:rgba(9,9,11,.97);backdrop-filter:blur(20px);
-  border-top:1px solid rgba(22,163,74,.2);
-  padding:10px 16px;transform:translateY(100%);transition:transform .3s
-}
-.sticky.show{transform:translateY(0)}
-.sticky-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:480px;margin:0 auto}
-.sticky-price{font-size:.75rem;color:var(--muted)}
-.sticky-price strong{color:var(--white);font-size:.9rem}
-.sticky-btn{
-  padding:12px 24px;border:none;border-radius:8px;
-  background:var(--cta);color:white;font-weight:700;font-size:.8rem;
-  cursor:pointer;white-space:nowrap
-}
-@media(max-width:860px){.sticky{display:block}}
+footer{padding:16px;text-align:center;font-size:.6rem;color:var(--dim)}
 
 /* Anim */
-.anim{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.anim{opacity:0;transform:translateY(16px);transition:all .5s cubic-bezier(.16,1,.3,1)}
 .anim.vis{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<!-- URGENCY BAR -->
+<!-- URGENCY -->
 <div class="urgency">
-  Site sera DELETADO em <span class="urgency-timer" id="timer">47:59:59</span> — ative antes que expire
+  Site sera DELETADO em <b id="timer">47:59:59</b> — ative antes que expire
 </div>
 
 <div class="page">
-<div class="hero">
 
-  <!-- PREVIEW (left on desktop, SECOND on mobile) -->
-  <div class="hero-left">
-    <div class="preview-bar">
-      <div class="preview-dots"><span></span><span></span><span></span></div>
-      <span class="preview-url" id="previewUrl">drleonellobocchese.com.br</span>
-      <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="preview-live">
-        Abrir ao vivo
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-      </a>
+<!-- ===== ABOVE THE FOLD — tudo visivel sem scroll ===== -->
+<div class="top">
+  <div class="wrap">
+    <div class="badge">Site pronto</div>
+    <h1>Dr. Leonello, seu <em>novo site</em> esta pronto.</h1>
+    <p class="sub">Ative agora antes que expire. Tudo incluso por 12 meses.</p>
+
+    <!-- Warn -->
+    <div class="warn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Site sera deletado permanentemente em 48h sem ativacao.
     </div>
-    <div class="preview-scroll">
-      <img src="images/desktop.png" alt="Site Dr. Leonello Bocchese">
-      <div class="preview-fade"></div>
+
+    <!-- Price -->
+    <div class="price">
+      <del>R$ 2.997</del>
+      <strong>R$ 1.497</strong>
+    </div>
+    <div class="price-sub">Site + dominio + hospedagem + SSL + suporte — 12 meses</div>
+    <div class="price-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      Zero mensalidade. Tudo incluso.
+    </div>
+
+    <!-- Methods — compact tabs -->
+    <div class="methods">
+      <button class="mt on" data-m="pix" onclick="pick(this)">
+        <div class="mt-name">PIX</div>
+        <div class="mt-val">R$ 1.297</div>
+        <div class="mt-tag">-R$ 200</div>
+      </button>
+      <button class="mt" data-m="card" onclick="pick(this)">
+        <div class="mt-name">Cartao</div>
+        <div class="mt-val">R$ 1.497</div>
+      </button>
+      <button class="mt" data-m="installments" onclick="pick(this)">
+        <div class="mt-name">10x</div>
+        <div class="mt-val">R$ 149,70</div>
+      </button>
+    </div>
+
+    <!-- Card fields (hidden by default, shown for card/installments) -->
+    <div class="card-fields" id="cardFields">
+      <input class="card-field" type="text" placeholder="Numero do cartao" maxlength="19" oninput="fmtCard(this)" inputmode="numeric">
+      <div class="card-row">
+        <input class="card-field" type="text" placeholder="MM/AA" maxlength="5" oninput="fmtExp(this)" inputmode="numeric">
+        <input class="card-field" type="text" placeholder="CVV" maxlength="4" inputmode="numeric">
+      </div>
+      <input class="card-field" type="text" placeholder="Nome no cartao" style="width:100%;min-width:100%">
+    </div>
+
+    <!-- CTA -->
+    <button class="btn" id="payBtn" onclick="pay()">
+      Ativar meu site agora
+      <small>Pagamento 100% seguro — ativo em ate 24h</small>
+    </button>
+
+    <div class="trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Seguro</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>7 dias garantia</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>24h no ar</span>
     </div>
   </div>
+</div>
 
-  <!-- CHECKOUT (right on desktop, FIRST on mobile) -->
-  <div class="hero-right">
-    <div class="badge">Site pronto para ativar</div>
+<!-- ===== BELOW FOLD ===== -->
 
-    <h1 class="title">Dr. Leonello, criamos seu <em>novo site</em>.</h1>
-    <p class="sub">Um site que reflete sua formacao internacional e o nivel da Clinica Adelle. Pronto para atrair pacientes de Florianopolis e regiao.</p>
+<!-- Domain -->
+<div class="section anim">
+  <div class="wrap">
+    <div class="domain-label">Escolha seu dominio (incluso)</div>
+    <div class="domain-row">
+      <div class="domain-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" spellcheck="false">
+        <span class="domain-ext">.com.br</span>
+      </div>
+      <button class="domain-btn" id="domainBtn" onclick="checkDomain()">Verificar</button>
+    </div>
+    <div class="domain-status" id="domainStatus"></div>
+  </div>
+</div>
 
-    <!-- Credentials — mostra que pesquisamos -->
-    <div class="credentials">
+<!-- Credentials + Preview -->
+<div class="section anim">
+  <div class="wrap">
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">Site personalizado com base na sua formacao e especialidades:</p>
+    <div class="creds">
       <span class="cred">Fellowship NYU</span>
       <span class="cred">Fellowship UCI</span>
       <span class="cred">SBCP</span>
@@ -342,189 +332,88 @@ footer{padding:20px;text-align:center;font-size:.62rem;color:var(--dim)}
       <span class="cred">Preceptor UFSC</span>
       <span class="cred">Lipo HD + VASER</span>
     </div>
-
-    <!-- Deletion Warning -->
-    <div class="warn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>
-        <strong>Este site sera deletado em 48 horas.</strong>
-        <span>Sem ativacao, o preview e todo o projeto serao removidos permanentemente.</span>
+    <div class="preview">
+      <div class="preview-bar">
+        <div class="preview-dots"><span></span><span></span><span></span></div>
+        <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="preview-link">
+          Abrir ao vivo
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
       </div>
-    </div>
-
-    <!-- Price -->
-    <div class="price-block">
-      <div class="price-tag">Pacote completo — 12 meses</div>
-      <div class="price-row">
-        <span class="price-old">R$ 2.997</span>
-        <span class="price-now">R$ 1.497</span>
+      <div class="preview-img">
+        <img src="images/desktop.png" alt="Site Dr. Leonello Bocchese">
       </div>
-      <div class="price-desc">Site + dominio + hospedagem + SSL + suporte</div>
-      <div class="price-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        <strong>Zero mensalidade.</strong> Tudo incluso por 1 ano.
-      </div>
-    </div>
-
-    <!-- Domain -->
-    <div class="domain">
-      <label class="domain-label">Seu dominio (incluso)</label>
-      <div class="domain-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" placeholder="seudominio" spellcheck="false" oninput="onDomain()">
-        <span class="domain-ext">.com.br</span>
-      </div>
-      <div class="domain-ok">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        Disponivel — dominio verificado
-      </div>
-    </div>
-
-    <!-- Methods -->
-    <div class="methods">
-      <button class="method active" data-method="pix" onclick="pick(this)">
-        <div class="method-dot"></div>
-        <div class="method-info">
-          <div class="method-name">PIX</div>
-          <div class="method-detail">R$ 1.297,00 (economia de R$ 200)</div>
-        </div>
-        <span class="method-badge">Melhor preco</span>
-      </button>
-      <button class="method" data-method="card" onclick="pick(this)">
-        <div class="method-dot"></div>
-        <div class="method-info">
-          <div class="method-name">Cartao de Credito</div>
-          <div class="method-detail">R$ 1.497,00 a vista</div>
-        </div>
-      </button>
-      <button class="method" data-method="installments" onclick="pick(this)">
-        <div class="method-dot"></div>
-        <div class="method-info">
-          <div class="method-name">Ate 10x no Cartao</div>
-          <div class="method-detail">10x de R$ 149,70</div>
-        </div>
-      </button>
-    </div>
-
-    <!-- CTA GREEN -->
-    <button class="btn-cta" id="payBtn" onclick="pay()">
-      Ativar meu site agora
-      <small>Pagamento 100% seguro — ativo em ate 24h</small>
-    </button>
-
-    <!-- Trust -->
-    <div class="trust">
-      <div class="trust-i">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Pagamento seguro
-      </div>
-      <div class="trust-i">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        7 dias de garantia
-      </div>
-      <div class="trust-i">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        Ativo em 24h
-      </div>
-    </div>
-
-    <!-- Included -->
-    <div>
-      <div class="included-title">Incluso no pacote</div>
-      <ul class="included-list">
-        <li>14 secoes exclusivas</li>
-        <li>SEO para cirurgiao plastico</li>
-        <li>100% responsivo</li>
-        <li>SSL + cadeado verde</li>
-        <li>Dominio .com.br</li>
-        <li>Suporte via WhatsApp</li>
-        <li>3 rodadas de ajustes</li>
-        <li>12 meses tudo incluso</li>
-      </ul>
     </div>
   </div>
+</div>
 
-</div><!-- .hero -->
-
-<!-- ========== BELOW FOLD ========== -->
-
+<!-- Included -->
+<div class="section anim">
+  <div class="wrap">
+    <div class="domain-label" style="margin-bottom:8px">Incluso no pacote</div>
+    <ul class="inc">
+      <li>14 secoes exclusivas</li>
+      <li>SEO cirurgiao plastico</li>
+      <li>100% responsivo</li>
+      <li>SSL + cadeado verde</li>
+      <li>Dominio .com.br</li>
+      <li>Suporte WhatsApp</li>
+      <li>3 rodadas de ajustes</li>
+      <li>12 meses completos</li>
+    </ul>
+  </div>
+</div>
 
 <!-- Reviews -->
-<div class="section reviews-bg anim">
-  <div class="reviews-center">
-    <h2>O que os pacientes dizem</h2>
-    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-    <div class="reviews-meta">4.8 de 5 — Clinica Adelle no Google</div>
+<div class="section anim">
+  <div class="wrap">
+    <div class="domain-label" style="margin-bottom:8px">Avaliacoes dos pacientes</div>
     <div class="review">
-      <q>Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas. Muito cuidadoso e atencioso.</q>
-      <cite>— Mariana R.</cite>
+      <q>Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas.</q>
+      <cite>— Mariana R. via Google</cite>
     </div>
     <div class="review">
       <q>A seguranca que o Dr. Leonello transmite e incomparavel. Minha lipo ficou natural e perfeita.</q>
-      <cite>— Carolina S.</cite>
+      <cite>— Carolina S. via Google</cite>
     </div>
   </div>
 </div>
 
 <!-- FAQ -->
 <div class="section anim">
-  <div class="section-center" style="max-width:600px">
-    <h2>Duvidas rapidas</h2>
-    <p class="section-sub">Respostas diretas</p>
+  <div class="wrap">
+    <div class="domain-label" style="margin-bottom:8px">Duvidas rapidas</div>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">Preciso fazer alguma coisa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Nada. Cuidamos de tudo: dominio, hospedagem, SSL, publicacao. Voce so aprova.</p></div>
+      <div class="faq-a"><p>Nada. Cuidamos de tudo: dominio, hospedagem, SSL, publicacao.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">E se eu nao gostar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>7 dias de garantia incondicional. Devolvemos 100% do valor, sem perguntas.</p></div>
+      <div class="faq-a"><p>7 dias de garantia. Devolvemos 100%, sem perguntas.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">Quanto tempo para ficar no ar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Apos o pagamento, seu site fica online em ate 24 horas com o dominio escolhido.</p></div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">Posso pedir alteracoes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Sim, 3 rodadas de ajustes inclusos. Texto, imagens, cores — o que precisar.</p></div>
+      <div class="faq-a"><p>Ate 24 horas apos o pagamento, com seu dominio.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">O que acontece apos 12 meses?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Renovacao opcional por R$ 49,90/mes. Sem multa, sem fidelidade. Cancele quando quiser.</p></div>
+      <div class="faq-a"><p>Renovacao opcional R$ 49,90/mes. Sem multa, cancele quando quiser.</p></div>
     </div>
   </div>
 </div>
 
 <!-- Final CTA -->
-<div class="final anim">
-  <h2 style="font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:6px">Seu site sera deletado quando o timer zerar.</h2>
-  <p style="color:var(--dim);font-size:.82rem;margin-bottom:18px">Ative agora e tenha presenca digital a altura da sua formacao.</p>
-  <button class="btn-cta" onclick="scrollTop()">
-    Ativar meu site — R$ 1.297 no PIX
-    <small>ou 10x de R$ 149,70 no cartao</small>
-  </button>
-  <div class="trust" style="margin-top:10px">
-    <div class="trust-i">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Garantia 7 dias
-    </div>
-    <div class="trust-i">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Pagamento seguro
-    </div>
+<div class="final">
+  <div class="wrap">
+    <p style="font-size:.8rem;color:var(--dim);margin-bottom:14px">Seu site sera deletado quando o timer zerar.</p>
+    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      Ativar meu site — R$ 1.297 no PIX
+      <small>ou 10x de R$ 149,70</small>
+    </button>
   </div>
 </div>
 
-<footer>
-  Proposta exclusiva para Dr. Leonello Bocchese — Clinica Adelle, Florianopolis/SC
-</footer>
-</div><!-- .page -->
-
-<!-- Mobile Sticky -->
-<div class="sticky" id="sticky">
-  <div class="sticky-inner">
-    <div class="sticky-price">PIX <strong>R$ 1.297</strong></div>
-    <button class="sticky-btn" onclick="scrollTop()">Ativar site</button>
-  </div>
+<footer>Proposta exclusiva — Dr. Leonello Bocchese — Clinica Adelle, Florianopolis/SC</footer>
 </div>
 
 <script>
@@ -533,39 +422,68 @@ const API='';
 const EXPIRE=Date.now()+48*3600000;
 let method='pix';
 
+// Timer
 function tick(){
   const d=EXPIRE-Date.now();
-  if(d<=0){document.getElementById('timer').textContent='DELETADO';document.getElementById('payBtn').disabled=true;document.querySelector('.urgency').style.background='#7f1d1d';return}
+  if(d<=0){document.getElementById('timer').textContent='DELETADO';document.getElementById('payBtn').disabled=true;return}
   const h=Math.floor(d/3.6e6),m=Math.floor(d%3.6e6/6e4),s=Math.floor(d%6e4/1e3);
   document.getElementById('timer').textContent=h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 }
 setInterval(tick,1000);tick();
 
-const stickyEl=document.getElementById('sticky');
-window.addEventListener('scroll',()=>{stickyEl.classList.toggle('show',scrollY>400)});
-
+// Animations
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.anim').forEach(e=>io.observe(e));
 
+// Payment method
 function pick(el){
-  document.querySelectorAll('.method').forEach(m=>m.classList.remove('active'));
-  el.classList.add('active');method=el.dataset.method;
+  document.querySelectorAll('.mt').forEach(m=>m.classList.remove('on'));
+  el.classList.add('on');
+  method=el.dataset.m;
+  document.getElementById('cardFields').classList.toggle('show',method==='card'||method==='installments');
 }
 
+// Card formatting
+function fmtCard(el){
+  let v=el.value.replace(/\D/g,'').slice(0,16);
+  el.value=v.replace(/(\d{4})(?=\d)/g,'$1 ');
+}
+function fmtExp(el){
+  let v=el.value.replace(/\D/g,'').slice(0,4);
+  if(v.length>=3)v=v.slice(0,2)+'/'+v.slice(2);
+  el.value=v;
+}
+
+// Domain check via whois
+async function checkDomain(){
+  const dom=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'')+'.com.br';
+  const st=document.getElementById('domainStatus');
+  const btn=document.getElementById('domainBtn');
+  btn.textContent='Verificando...';btn.disabled=true;
+  st.className='domain-status loading';st.textContent='Consultando registro.br...';
+  try{
+    // Use whois proxy or fallback to DNS check
+    const r=await fetch('https://dns.google/resolve?name='+dom+'&type=A');
+    const d=await r.json();
+    if(d.Answer){
+      st.className='domain-status fail';st.textContent='Dominio ja registrado. Tente outro.';
+    }else{
+      st.className='domain-status ok';st.textContent='Disponivel! Dominio sera registrado na ativacao.';
+    }
+  }catch(e){
+    st.className='domain-status ok';st.textContent='Nao foi possivel verificar agora. Confirmaremos apos a ativacao.';
+  }
+  btn.textContent='Verificar';btn.disabled=false;
+}
+
+// FAQ
 function togFaq(btn){
   const item=btn.parentElement,open=item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
   if(!open)item.classList.add('open');
 }
 
-function onDomain(){
-  const v=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
-  document.getElementById('domainInput').value=v;
-  document.getElementById('previewUrl').textContent=v?v+'.com.br':'seudominio.com.br';
-}
-
-function scrollTop(){document.querySelector('.hero-right').scrollIntoView({behavior:'smooth'})}
-
+// Pay
 async function pay(){
   const btn=document.getElementById('payBtn');
   btn.disabled=true;btn.textContent='Processando...';
@@ -585,7 +503,7 @@ async function pay(){
   }else{
     setTimeout(()=>{
       btn.disabled=false;btn.innerHTML='Ativar meu site agora<small>Pagamento 100% seguro — ativo em ate 24h</small>';
-      alert('Modo demo — Configure API para ativar pagamentos');
+      alert('Modo demo — Configure API para pagamentos');
     },1500);
   }
 }

@@ -91,11 +91,11 @@ img{max-width:100%;display:block}
 
 /* Checkout */
 .hero-right{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:40px 32px;background:var(--bg)
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:32px 32px 40px;background:var(--bg)
 }
 @media(min-width:861px){
-  .hero-right{padding:40px 48px;max-height:100vh;overflow-y:auto}
+  .hero-right{padding:32px 48px 40px;overflow-y:auto}
 }
 
 /* Badge */
@@ -242,21 +242,6 @@ img{max-width:100%;display:block}
 .section h2{font-size:1.2rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:6px}
 .section-sub{text-align:center;color:var(--dim);font-size:.82rem;margin-bottom:28px}
 
-/* Devices */
-.devices{text-align:center;margin-bottom:28px}
-.device-tabs{display:inline-flex;gap:4px;background:var(--bg2);border-radius:8px;padding:4px}
-.dtab{
-  padding:7px 16px;border-radius:6px;border:none;background:transparent;
-  color:var(--muted);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .15s;
-  font-family:var(--sans)
-}
-.dtab.on{background:var(--bg3);color:var(--white)}
-.device-frame{
-  max-width:700px;margin:0 auto;border-radius:var(--r);overflow:hidden;
-  border:1px solid rgba(255,255,255,.06);box-shadow:0 16px 48px rgba(0,0,0,.4)
-}
-.device-frame img{width:100%;display:block}
-.device-frame img.off{display:none}
 
 /* Reviews */
 .reviews-bg{background:var(--bg2)}
@@ -463,25 +448,6 @@ footer{padding:20px;text-align:center;font-size:.62rem;color:var(--dim)}
 
 <!-- ========== BELOW FOLD ========== -->
 
-<!-- Devices -->
-<div class="section anim">
-  <div class="section-center">
-    <h2>Perfeito em qualquer dispositivo</h2>
-    <p class="section-sub">85% dos pacientes pesquisam no celular antes de agendar</p>
-    <div class="devices">
-      <div class="device-tabs">
-        <button class="dtab on" onclick="switchDev('desktop',this)">Desktop</button>
-        <button class="dtab" onclick="switchDev('tablet',this)">Tablet</button>
-        <button class="dtab" onclick="switchDev('mobile',this)">Mobile</button>
-      </div>
-    </div>
-    <div class="device-frame">
-      <img src="images/desktop.png" alt="Desktop" id="dDesktop">
-      <img src="images/tablet.png" alt="Tablet" id="dTablet" class="off">
-      <img src="images/mobile.png" alt="Mobile" id="dMobile" class="off">
-    </div>
-  </div>
-</div>
 
 <!-- Reviews -->
 <div class="section reviews-bg anim">
@@ -584,11 +550,6 @@ document.querySelectorAll('.anim').forEach(e=>io.observe(e));
 function pick(el){
   document.querySelectorAll('.method').forEach(m=>m.classList.remove('active'));
   el.classList.add('active');method=el.dataset.method;
-}
-
-function switchDev(d,btn){
-  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');
-  ['Desktop','Tablet','Mobile'].forEach(n=>document.getElementById('d'+n).classList.toggle('off',n.toLowerCase()!==d));
 }
 
 function togFaq(btn){

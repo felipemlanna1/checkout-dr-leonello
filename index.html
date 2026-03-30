@@ -385,20 +385,35 @@ function fmtExp(el){
   el.value=v;
 }
 
-// Domain check — abre consulta oficial em nova aba
-function checkDomain(){
+// Domain check via RDAP
+async function checkDomain(){
   const raw=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
   if(!raw)return;
   const ext=document.getElementById('domainExt').value;
   const dom=raw+ext;
-  if(ext==='.com'){
-    window.open('https://www.whois.com/whois/'+dom,'_blank');
-  }else{
-    window.open('https://registro.br/dominio/disponibilidade/?searchedDomain='+dom,'_blank');
-  }
   const st=document.getElementById('domainStatus');
-  st.className='domain-status loading';
-  st.textContent='Consulta aberta em nova aba. Confirme a disponibilidade.';
+  const btn=document.getElementById('domainBtn');
+  btn.textContent='Verificando...';btn.disabled=true;
+  st.className='domain-status loading';st.textContent='Consultando...';
+  try{
+    const rdap=ext==='.com'?'https://rdap.verisign.com/com/v1/domain/':'https://rdap.registro.br/domain/';
+    const r=await fetch(rdap+dom);
+    if(r.status===200){
+      st.className='domain-status fail';
+      st.innerHTML='&#10060; <b>'+dom+'</b> ja esta registrado. Tente outro nome.';
+    }else if(r.status===404){
+      st.className='domain-status ok';
+      st.innerHTML='&#9989; <b>'+dom+'</b> esta disponivel!';
+    }else{
+      throw new Error('status '+r.status);
+    }
+  }catch(e){
+    // Fallback — link direto
+    const url=ext==='.com'?'https://www.whois.com/whois/'+dom:'https://registro.br/dominio/disponibilidade/?searchedDomain='+dom;
+    st.className='domain-status loading';
+    st.innerHTML='Nao foi possivel verificar. <a href="'+url+'" target="_blank" style="color:var(--gold);text-decoration:underline">Consultar manualmente</a>';
+  }
+  btn.textContent='Verificar';btn.disabled=false;
 }
 
 // FAQ

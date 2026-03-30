@@ -15,6 +15,7 @@
   --gold:#c8a96e;--gold-light:#dbc295;--gold-dark:#a8884e;
   --text:#e4e4e7;--muted:#a1a1aa;--dim:#71717a;
   --white:#fafafa;--green:#22c55e;--red:#ef4444;
+  --cta:#16a34a;--cta-hover:#15803d;
   --sans:'Inter',-apple-system,sans-serif;
   --r:12px;
 }
@@ -27,7 +28,7 @@ img{max-width:100%;display:block}
   position:fixed;top:0;left:0;right:0;z-index:100;
   background:linear-gradient(90deg,#b91c1c,#dc2626,#b91c1c);
   color:white;text-align:center;padding:10px 16px;
-  font-size:.8rem;font-weight:600;letter-spacing:.02em;
+  font-size:.78rem;font-weight:600;letter-spacing:.02em;
   display:flex;align-items:center;justify-content:center;gap:8px
 }
 .urgency-timer{
@@ -35,7 +36,6 @@ img{max-width:100%;display:block}
   background:rgba(0,0,0,.3);padding:3px 10px;border-radius:4px;font-weight:700
 }
 
-/* ========== MAIN LAYOUT ========== */
 .page{padding:52px 0 0}
 
 /* ========== HERO SPLIT ========== */
@@ -43,18 +43,21 @@ img{max-width:100%;display:block}
   display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 52px);
   gap:0;position:relative
 }
+
+/* MOBILE FIRST: checkout comes first */
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{order:-1}
 }
 
-/* LEFT — Site Preview */
+/* Preview */
 .hero-left{
   background:var(--bg2);position:relative;overflow:hidden;
   display:flex;flex-direction:column;
   border-right:1px solid rgba(255,255,255,.04)
 }
-.preview-label{
-  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
+.preview-bar{
+  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
   background:var(--bg3);border-bottom:1px solid rgba(255,255,255,.06);
   font-size:.72rem;color:var(--dim)
 }
@@ -77,135 +80,174 @@ img{max-width:100%;display:block}
   max-height:calc(100vh - 100px)
 }
 .preview-scroll img{width:100%;display:block}
-.preview-overlay{
-  position:absolute;bottom:0;left:0;right:0;height:120px;
+.preview-fade{
+  position:absolute;bottom:0;left:0;right:0;height:100px;
   background:linear-gradient(transparent,var(--bg2));pointer-events:none
 }
-
 @media(max-width:860px){
-  .hero-left{max-height:45vh}
-  .preview-scroll{max-height:38vh}
+  .hero-left{max-height:40vh}
+  .preview-scroll{max-height:34vh}
 }
 
-/* RIGHT — Checkout */
+/* Checkout */
 .hero-right{
   display:flex;flex-direction:column;justify-content:center;
-  padding:40px 32px;position:relative;
-  background:var(--bg)
+  padding:40px 32px;background:var(--bg)
 }
 @media(min-width:861px){
   .hero-right{padding:40px 48px;max-height:100vh;overflow-y:auto}
 }
 
-.checkout-badge{
+/* Badge */
+.badge{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--green);margin-bottom:16px
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--green);margin-bottom:14px
 }
-.checkout-badge::before{
+.badge::before{
   content:'';width:6px;height:6px;border-radius:50%;background:var(--green);
-  animation:blink 1.5s infinite
+  animation:pulse 1.5s infinite
 }
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-.checkout-title{
-  font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--white);
-  line-height:1.2;margin-bottom:8px;letter-spacing:-.03em
+/* Title */
+.title{
+  font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;color:var(--white);
+  line-height:1.2;margin-bottom:6px;letter-spacing:-.03em
 }
-.checkout-title span{color:var(--gold)}
-.checkout-sub{color:var(--muted);font-size:.9rem;margin-bottom:28px;line-height:1.6}
+.title em{color:var(--gold);font-style:normal}
 
-/* Price Block */
+/* Subtitle — personalized */
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:10px;line-height:1.6}
+.credentials{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px
+}
+.cred{
+  font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  padding:4px 8px;border-radius:4px;
+  background:rgba(200,169,110,.08);color:var(--gold);border:1px solid rgba(200,169,110,.12)
+}
+
+/* Deletion Warning */
+.warn{
+  background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);
+  border-radius:8px;padding:12px 14px;margin-bottom:18px;
+  display:flex;align-items:flex-start;gap:10px;color:#ef4444
+}
+.warn svg{flex-shrink:0;margin-top:1px}
+.warn strong{display:block;font-size:.78rem;font-weight:700;margin-bottom:2px}
+.warn span{font-size:.72rem;color:var(--muted);line-height:1.5}
+
+/* Price */
 .price-block{
   background:var(--bg2);border:1px solid rgba(200,169,110,.15);
-  border-radius:var(--r);padding:24px;margin-bottom:20px
+  border-radius:var(--r);padding:20px 22px;margin-bottom:16px
 }
-.price-promo{
-  display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.1em;background:var(--red);color:white;
-  padding:4px 10px;border-radius:4px;margin-bottom:12px
+.price-tag{
+  display:inline-block;font-size:.62rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;background:var(--gold);color:var(--bg);
+  padding:4px 10px;border-radius:4px;margin-bottom:10px
 }
 .price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-.price-old{font-size:1.1rem;color:var(--dim);text-decoration:line-through}
-.price-now{font-size:2.4rem;font-weight:800;color:var(--white);letter-spacing:-.03em}
-.price-period{font-size:.82rem;color:var(--muted)}
-.price-monthly{
+.price-old{font-size:1rem;color:var(--dim);text-decoration:line-through}
+.price-now{font-size:2.2rem;font-weight:800;color:var(--white);letter-spacing:-.03em}
+.price-desc{font-size:.78rem;color:var(--muted)}
+.price-note{
   margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);
-  font-size:.78rem;color:var(--dim);display:flex;align-items:center;gap:6px
+  font-size:.75rem;color:var(--dim);display:flex;align-items:center;gap:6px
 }
-.price-monthly strong{color:var(--muted)}
+.price-note svg{color:var(--green);flex-shrink:0}
+.price-note strong{color:var(--gold)}
 
-/* Payment Methods */
-.methods{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+/* Domain */
+.domain{margin-bottom:16px}
+.domain-label{display:block;font-size:.72rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.domain-wrap{
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg2);border:1.5px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:10px 14px;transition:border-color .15s
+}
+.domain-wrap:focus-within{border-color:var(--gold)}
+.domain-wrap svg{color:var(--dim);flex-shrink:0}
+.domain-input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--white);font-family:monospace;font-size:.85rem;min-width:0
+}
+.domain-input::placeholder{color:var(--dim)}
+.domain-ext{color:var(--muted);font-family:monospace;font-size:.85rem;flex-shrink:0}
+.domain-ok{
+  display:flex;align-items:center;gap:5px;
+  margin-top:5px;font-size:.68rem;color:var(--green)
+}
+
+/* Methods */
+.methods{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .method{
-  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  display:flex;align-items:center;gap:10px;padding:11px 14px;
   border-radius:8px;border:1.5px solid rgba(255,255,255,.08);
   background:transparent;cursor:pointer;transition:all .15s;
   font-family:var(--sans);text-align:left;color:var(--text);width:100%
 }
 .method:hover{border-color:rgba(200,169,110,.25);background:rgba(200,169,110,.03)}
 .method.active{border-color:var(--gold);background:rgba(200,169,110,.06)}
-.method-radio{
+.method-dot{
   width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.2);
   flex-shrink:0;position:relative;transition:all .15s
 }
-.method.active .method-radio{border-color:var(--gold)}
-.method.active .method-radio::after{
+.method.active .method-dot{border-color:var(--gold)}
+.method.active .method-dot::after{
   content:'';position:absolute;inset:3px;border-radius:50%;background:var(--gold)
 }
 .method-info{flex:1}
-.method-name{font-size:.82rem;font-weight:600;color:var(--white)}
-.method-detail{font-size:.72rem;color:var(--muted);margin-top:1px}
-.method-tag{
-  font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+.method-name{font-size:.8rem;font-weight:600;color:var(--white)}
+.method-detail{font-size:.7rem;color:var(--muted);margin-top:1px}
+.method-badge{
+  font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
   background:rgba(34,197,94,.12);color:var(--green);padding:3px 7px;border-radius:3px;
   white-space:nowrap
 }
 
-/* CTA Button */
-.btn-pay{
+/* CTA — GREEN for action */
+.btn-cta{
   width:100%;padding:18px 16px;border:none;border-radius:var(--r);
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-size:1rem;font-weight:700;cursor:pointer;
-  transition:all .2s;margin-bottom:12px;position:relative;
-  line-height:1.4;min-height:auto
+  background:var(--cta);color:white;font-size:1rem;font-weight:700;
+  cursor:pointer;transition:all .2s;margin-bottom:10px;line-height:1.4
 }
-.btn-pay:hover{box-shadow:0 6px 20px rgba(200,169,110,.3);transform:translateY(-1px)}
-.btn-pay:active{transform:translateY(0)}
-.btn-pay:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.btn-pay span{display:block;font-size:.7rem;font-weight:500;opacity:.7;margin-top:3px}
+.btn-cta:hover{background:var(--cta-hover);box-shadow:0 6px 24px rgba(22,163,74,.3);transform:translateY(-1px)}
+.btn-cta:active{transform:translateY(0)}
+.btn-cta:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-cta small{display:block;font-size:.7rem;font-weight:400;opacity:.8;margin-top:3px}
 
-/* Trust line */
-.trust-line{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
-  font-size:.7rem;color:var(--dim);margin-bottom:24px
+/* Trust */
+.trust{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:14px;
+  font-size:.68rem;color:var(--dim);margin-bottom:20px
 }
-.trust-item{display:flex;align-items:center;gap:4px}
-.trust-item svg{width:13px;height:13px;color:var(--green)}
+.trust-i{display:flex;align-items:center;gap:4px}
+.trust-i svg{width:12px;height:12px;color:var(--green)}
 
-/* Included list */
-.included{margin-top:8px}
-.included-title{font-size:.75rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
-.included-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+/* Included */
+.included-title{font-size:.72rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.included-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .included-list li{
-  font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px
+  font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:6px
 }
 .included-list li::before{
   content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0
 }
 
-/* ========== BELOW FOLD — Extra convincing ========== */
-.extra{padding:60px 20px;border-top:1px solid rgba(255,255,255,.04)}
-.extra-center{max-width:700px;margin:0 auto}
-.extra h2{font-size:1.3rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:8px}
-.extra-sub{text-align:center;color:var(--dim);font-size:.85rem;margin-bottom:32px}
+/* ========== BELOW FOLD ========== */
+.section{padding:48px 20px;border-top:1px solid rgba(255,255,255,.04)}
+.section-center{max-width:700px;margin:0 auto}
+.section h2{font-size:1.2rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:6px}
+.section-sub{text-align:center;color:var(--dim);font-size:.82rem;margin-bottom:28px}
 
-/* Device tabs */
-.devices{text-align:center;margin-bottom:32px}
+/* Devices */
+.devices{text-align:center;margin-bottom:28px}
 .device-tabs{display:inline-flex;gap:4px;background:var(--bg2);border-radius:8px;padding:4px}
 .dtab{
-  padding:8px 18px;border-radius:6px;border:none;background:transparent;
-  color:var(--muted);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .15s;
+  padding:7px 16px;border-radius:6px;border:none;background:transparent;
+  color:var(--muted);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .15s;
   font-family:var(--sans)
 }
 .dtab.on{background:var(--bg3);color:var(--white)}
@@ -217,99 +259,58 @@ img{max-width:100%;display:block}
 .device-frame img.off{display:none}
 
 /* Reviews */
-.reviews{
-  padding:48px 20px;background:var(--bg2);
-  border-top:1px solid rgba(255,255,255,.04)
-}
+.reviews-bg{background:var(--bg2)}
 .reviews-center{max-width:600px;margin:0 auto;text-align:center}
-.reviews h2{font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:4px}
-.reviews-stars{color:var(--gold);font-size:1.2rem;margin-bottom:4px}
-.reviews-meta{font-size:.78rem;color:var(--dim);margin-bottom:24px}
-.review-card{
+.stars{color:var(--gold);font-size:1.1rem;margin-bottom:4px}
+.reviews-meta{font-size:.75rem;color:var(--dim);margin-bottom:20px}
+.review{
   background:var(--bg);border:1px solid rgba(255,255,255,.04);
-  border-radius:var(--r);padding:20px;text-align:left;margin-bottom:12px
+  border-radius:var(--r);padding:18px;text-align:left;margin-bottom:10px
 }
-.review-text{font-size:.85rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:8px}
-.review-author{font-size:.75rem;color:var(--dim);font-weight:600}
+.review q{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;display:block;margin-bottom:6px}
+.review cite{font-size:.72rem;color:var(--dim);font-weight:600;font-style:normal}
 
-/* FAQ compact */
-.faq{padding:48px 20px;border-top:1px solid rgba(255,255,255,.04)}
-.faq-center{max-width:600px;margin:0 auto}
-.faq h2{font-size:1.2rem;font-weight:700;color:var(--white);text-align:center;margin-bottom:24px}
+/* FAQ */
 .faq-item{border-bottom:1px solid rgba(255,255,255,.05)}
 .faq-q{
-  width:100%;padding:14px 0;display:flex;align-items:center;justify-content:space-between;
-  background:none;border:none;color:var(--white);font-size:.85rem;font-weight:500;
+  width:100%;padding:12px 0;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;color:var(--white);font-size:.82rem;font-weight:500;
   cursor:pointer;text-align:left;font-family:var(--sans);gap:12px
 }
-.faq-q svg{width:16px;height:16px;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-q svg{width:14px;height:14px;color:var(--gold);flex-shrink:0;transition:transform .3s}
 .faq-item.open .faq-q svg{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .faq-item.open .faq-a{max-height:160px}
-.faq-a p{padding:0 0 14px;font-size:.8rem;color:var(--muted);line-height:1.6}
+.faq-a p{padding:0 0 12px;font-size:.78rem;color:var(--muted);line-height:1.6}
 
 /* Final CTA */
 .final{
   padding:48px 20px;text-align:center;
   background:linear-gradient(180deg,var(--bg),var(--bg2))
 }
-.final .btn-pay{max-width:400px;margin:0 auto 12px}
+.final .btn-cta{max-width:420px;margin:0 auto 10px}
 
-footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
+footer{padding:20px;text-align:center;font-size:.62rem;color:var(--dim)}
 
-/* Deletion Warning */
-.deletion-warning{
-  background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);
-  border-radius:8px;padding:12px 14px;margin-bottom:20px;
-  display:flex;align-items:flex-start;gap:10px;color:#ef4444
-}
-.deletion-warning svg{flex-shrink:0;margin-top:1px}
-.deletion-warning strong{display:block;font-size:.78rem;font-weight:700;margin-bottom:2px}
-.deletion-warning span{font-size:.72rem;color:var(--muted);line-height:1.5}
-
-/* Domain Selector */
-.domain-block{margin-bottom:20px}
-.domain-label{display:block;font-size:.75rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.domain-input-wrap{
-  display:flex;align-items:center;gap:8px;
-  background:var(--bg2);border:1.5px solid rgba(255,255,255,.08);
-  border-radius:8px;padding:10px 14px;transition:border-color .15s
-}
-.domain-input-wrap:focus-within{border-color:var(--gold)}
-.domain-input-wrap svg{color:var(--dim);flex-shrink:0}
-.domain-input{
-  flex:1;background:none;border:none;outline:none;
-  color:var(--white);font-family:monospace;font-size:.88rem;
-  min-width:0
-}
-.domain-input::placeholder{color:var(--dim)}
-.domain-suffix{color:var(--muted);font-family:monospace;font-size:.88rem;flex-shrink:0}
-.domain-status{
-  display:flex;align-items:center;gap:5px;
-  margin-top:6px;font-size:.7rem;color:var(--green)
-}
-
-/* ========== MOBILE STICKY ========== */
+/* Mobile sticky */
 .sticky{
   display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;
   background:rgba(9,9,11,.97);backdrop-filter:blur(20px);
-  border-top:1px solid rgba(200,169,110,.15);
+  border-top:1px solid rgba(22,163,74,.2);
   padding:10px 16px;transform:translateY(100%);transition:transform .3s
 }
 .sticky.show{transform:translateY(0)}
 .sticky-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:480px;margin:0 auto}
-.sticky-price{font-size:.78rem;color:var(--muted)}
-.sticky-price strong{color:var(--white);font-size:.95rem}
+.sticky-price{font-size:.75rem;color:var(--muted)}
+.sticky-price strong{color:var(--white);font-size:.9rem}
 .sticky-btn{
   padding:12px 24px;border:none;border-radius:8px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
-  color:var(--bg);font-weight:700;font-size:.82rem;cursor:pointer;
-  white-space:nowrap
+  background:var(--cta);color:white;font-weight:700;font-size:.8rem;
+  cursor:pointer;white-space:nowrap
 }
 @media(max-width:860px){.sticky{display:block}}
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+/* Anim */
 .anim{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.16,1,.3,1)}
 .anim.vis{opacity:1;transform:none}
 </style>
@@ -318,19 +319,17 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 
 <!-- URGENCY BAR -->
 <div class="urgency">
-  Site sera DELETADO em <span class="urgency-timer" id="barTimer">47:59:59</span> — ative antes que expire
+  Site sera DELETADO em <span class="urgency-timer" id="timer">47:59:59</span> — ative antes que expire
 </div>
 
 <div class="page">
-
-<!-- ========== HERO SPLIT ========== -->
 <div class="hero">
 
-  <!-- LEFT: Site Preview -->
+  <!-- PREVIEW (left on desktop, SECOND on mobile) -->
   <div class="hero-left">
-    <div class="preview-label">
+    <div class="preview-bar">
       <div class="preview-dots"><span></span><span></span><span></span></div>
-      <span class="preview-url">drleonellobocchese.com.br</span>
+      <span class="preview-url" id="previewUrl">drleonellobocchese.com.br</span>
       <a href="https://felipemlanna1.github.io/537-dr-leonello/" target="_blank" rel="noopener" class="preview-live">
         Abrir ao vivo
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
@@ -338,19 +337,29 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
     </div>
     <div class="preview-scroll">
       <img src="images/desktop.png" alt="Site Dr. Leonello Bocchese">
-      <div class="preview-overlay"></div>
+      <div class="preview-fade"></div>
     </div>
   </div>
 
-  <!-- RIGHT: Checkout -->
+  <!-- CHECKOUT (right on desktop, FIRST on mobile) -->
   <div class="hero-right">
-    <div class="checkout-badge">Site pronto para ativar</div>
+    <div class="badge">Site pronto para ativar</div>
 
-    <h1 class="checkout-title">Dr. Leonello, seu site <span>está pronto</span>.</h1>
-    <p class="checkout-sub">Criamos um site profissional exclusivo para sua clínica. Ative agora com seu domínio próprio e comece a atrair novos pacientes.</p>
+    <h1 class="title">Dr. Leonello, criamos seu <em>novo site</em>.</h1>
+    <p class="sub">Um site que reflete sua formacao internacional e o nivel da Clinica Adelle. Pronto para atrair pacientes de Florianopolis e regiao.</p>
+
+    <!-- Credentials — mostra que pesquisamos -->
+    <div class="credentials">
+      <span class="cred">Fellowship NYU</span>
+      <span class="cred">Fellowship UCI</span>
+      <span class="cred">SBCP</span>
+      <span class="cred">IPRAS</span>
+      <span class="cred">Preceptor UFSC</span>
+      <span class="cred">Lipo HD + VASER</span>
+    </div>
 
     <!-- Deletion Warning -->
-    <div class="deletion-warning">
+    <div class="warn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <div>
         <strong>Este site sera deletado em 48 horas.</strong>
@@ -360,51 +369,51 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 
     <!-- Price -->
     <div class="price-block">
-      <div class="price-promo">Pacote completo — 1 ano incluso</div>
+      <div class="price-tag">Pacote completo — 12 meses</div>
       <div class="price-row">
         <span class="price-old">R$ 2.997</span>
         <span class="price-now">R$ 1.497</span>
       </div>
-      <div class="price-period">Site + dominio + hospedagem + SSL + suporte por 12 meses</div>
-      <div class="price-monthly">
+      <div class="price-desc">Site + dominio + hospedagem + SSL + suporte</div>
+      <div class="price-note">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        <strong>Zero mensalidade.</strong> Tudo incluso por 1 ano. Sem surpresas.
+        <strong>Zero mensalidade.</strong> Tudo incluso por 1 ano.
       </div>
     </div>
 
-    <!-- Domain Selector -->
-    <div class="domain-block">
-      <label class="domain-label">Escolha seu dominio</label>
-      <div class="domain-input-wrap">
+    <!-- Domain -->
+    <div class="domain">
+      <label class="domain-label">Seu dominio (incluso)</label>
+      <div class="domain-wrap">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" placeholder="seudominio" spellcheck="false" oninput="checkDomain()">
-        <span class="domain-suffix">.com.br</span>
+        <input type="text" id="domainInput" class="domain-input" value="drleonellobocchese" placeholder="seudominio" spellcheck="false" oninput="onDomain()">
+        <span class="domain-ext">.com.br</span>
       </div>
-      <div class="domain-status" id="domainStatus">
+      <div class="domain-ok">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-        Dominio incluso no pacote
+        Disponivel — dominio verificado
       </div>
     </div>
 
-    <!-- Payment Methods -->
+    <!-- Methods -->
     <div class="methods">
-      <button class="method active" data-method="pix" onclick="pickMethod(this)">
-        <div class="method-radio"></div>
+      <button class="method active" data-method="pix" onclick="pick(this)">
+        <div class="method-dot"></div>
         <div class="method-info">
           <div class="method-name">PIX</div>
           <div class="method-detail">R$ 1.297,00 (economia de R$ 200)</div>
         </div>
-        <span class="method-tag">Melhor preco</span>
+        <span class="method-badge">Melhor preco</span>
       </button>
-      <button class="method" data-method="credit_card" onclick="pickMethod(this)">
-        <div class="method-radio"></div>
+      <button class="method" data-method="card" onclick="pick(this)">
+        <div class="method-dot"></div>
         <div class="method-info">
           <div class="method-name">Cartao de Credito</div>
           <div class="method-detail">R$ 1.497,00 a vista</div>
         </div>
       </button>
-      <button class="method" data-method="installments" onclick="pickMethod(this)">
-        <div class="method-radio"></div>
+      <button class="method" data-method="installments" onclick="pick(this)">
+        <div class="method-dot"></div>
         <div class="method-info">
           <div class="method-name">Ate 10x no Cartao</div>
           <div class="method-detail">10x de R$ 149,70</div>
@@ -412,57 +421,58 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
       </button>
     </div>
 
-    <!-- CTA -->
-    <button class="btn-pay" id="payBtn" onclick="pay()">
+    <!-- CTA GREEN -->
+    <button class="btn-cta" id="payBtn" onclick="pay()">
       Ativar meu site agora
-      <span>Pagamento seguro via AbacatePay</span>
+      <small>Pagamento 100% seguro — ativo em ate 24h</small>
     </button>
 
     <!-- Trust -->
-    <div class="trust-line">
-      <div class="trust-item">
+    <div class="trust">
+      <div class="trust-i">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         Pagamento seguro
       </div>
-      <div class="trust-item">
+      <div class="trust-i">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         7 dias de garantia
       </div>
-      <div class="trust-item">
+      <div class="trust-i">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
         Ativo em 24h
       </div>
     </div>
 
     <!-- Included -->
-    <div class="included">
-      <div class="included-title">Incluído</div>
+    <div>
+      <div class="included-title">Incluso no pacote</div>
       <ul class="included-list">
-        <li>14 seções exclusivas</li>
-        <li>SEO para cirurgião plástico</li>
+        <li>14 secoes exclusivas</li>
+        <li>SEO para cirurgiao plastico</li>
         <li>100% responsivo</li>
         <li>SSL + cadeado verde</li>
-        <li>Domínio .com.br</li>
+        <li>Dominio .com.br</li>
         <li>Suporte via WhatsApp</li>
         <li>3 rodadas de ajustes</li>
         <li>12 meses tudo incluso</li>
       </ul>
     </div>
   </div>
-</div>
 
-<!-- ========== ABAIXO DA DOBRA ========== -->
+</div><!-- .hero -->
 
-<!-- Device Preview -->
-<div class="extra anim">
-  <div class="extra-center">
+<!-- ========== BELOW FOLD ========== -->
+
+<!-- Devices -->
+<div class="section anim">
+  <div class="section-center">
     <h2>Perfeito em qualquer dispositivo</h2>
-    <p class="extra-sub">85% dos pacientes pesquisam no celular</p>
+    <p class="section-sub">85% dos pacientes pesquisam no celular antes de agendar</p>
     <div class="devices">
       <div class="device-tabs">
-        <button class="dtab on" onclick="switchDevice('desktop',this)">Desktop</button>
-        <button class="dtab" onclick="switchDevice('tablet',this)">Tablet</button>
-        <button class="dtab" onclick="switchDevice('mobile',this)">Mobile</button>
+        <button class="dtab on" onclick="switchDev('desktop',this)">Desktop</button>
+        <button class="dtab" onclick="switchDev('tablet',this)">Tablet</button>
+        <button class="dtab" onclick="switchDev('mobile',this)">Mobile</button>
       </div>
     </div>
     <div class="device-frame">
@@ -473,64 +483,65 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
   </div>
 </div>
 
-<!-- Social Proof -->
-<div class="reviews anim">
+<!-- Reviews -->
+<div class="section reviews-bg anim">
   <div class="reviews-center">
-    <h2>Avaliações dos pacientes do Dr. Leonello</h2>
-    <div class="reviews-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-    <div class="reviews-meta">4.8 de 5 — mais de 200 avaliações no Google</div>
-    <div class="review-card">
-      <div class="review-text">"Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas. Muito cuidadoso e atencioso."</div>
-      <div class="review-author">— Mariana R.</div>
+    <h2>O que os pacientes dizem</h2>
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div class="reviews-meta">4.8 de 5 — Clinica Adelle no Google</div>
+    <div class="review">
+      <q>Profissional excepcional! Fiz mamoplastia com o Dr. Leonello e o resultado superou todas as minhas expectativas. Muito cuidadoso e atencioso.</q>
+      <cite>— Mariana R.</cite>
     </div>
-    <div class="review-card">
-      <div class="review-text">"A segurança que o Dr. Leonello transmite é incomparável. Minha lipo ficou natural e perfeita."</div>
-      <div class="review-author">— Carolina S.</div>
+    <div class="review">
+      <q>A seguranca que o Dr. Leonello transmite e incomparavel. Minha lipo ficou natural e perfeita.</q>
+      <cite>— Carolina S.</cite>
     </div>
   </div>
 </div>
 
 <!-- FAQ -->
-<div class="faq anim">
-  <div class="faq-center">
-    <h2>Dúvidas rápidas</h2>
+<div class="section anim">
+  <div class="section-center" style="max-width:600px">
+    <h2>Duvidas rapidas</h2>
+    <p class="section-sub">Respostas diretas</p>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">Preciso fazer alguma coisa?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Nada. Nós cuidamos de tudo: domínio, hospedagem, SSL, publicação. Você só aprova.</p></div>
+      <div class="faq-a"><p>Nada. Cuidamos de tudo: dominio, hospedagem, SSL, publicacao. Voce so aprova.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">E se eu não gostar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="faq-q" onclick="togFaq(this)">E se eu nao gostar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
       <div class="faq-a"><p>7 dias de garantia incondicional. Devolvemos 100% do valor, sem perguntas.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="togFaq(this)">Quanto tempo para ficar no ar?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Após o pagamento, seu site fica online em até 24 horas com o domínio que escolher.</p></div>
+      <div class="faq-a"><p>Apos o pagamento, seu site fica online em ate 24 horas com o dominio escolhido.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">Posso pedir alterações?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="faq-q" onclick="togFaq(this)">Posso pedir alteracoes?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
       <div class="faq-a"><p>Sim, 3 rodadas de ajustes inclusos. Texto, imagens, cores — o que precisar.</p></div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="togFaq(this)">Posso cancelar a mensalidade?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="faq-a"><p>Sim, sem multa, sem fidelidade. Avise com 30 dias de antecedência.</p></div>
+      <button class="faq-q" onclick="togFaq(this)">O que acontece apos 12 meses?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="faq-a"><p>Renovacao opcional por R$ 49,90/mes. Sem multa, sem fidelidade. Cancele quando quiser.</p></div>
     </div>
   </div>
 </div>
 
 <!-- Final CTA -->
 <div class="final anim">
-  <h2 style="font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:8px">Pronto para ativar?</h2>
-  <p style="color:var(--dim);font-size:.85rem;margin-bottom:20px">Seu site sera deletado quando o timer zerar. Ative antes.</p>
-  <button class="btn-pay" onclick="scrollTop()">
+  <h2 style="font-size:1.3rem;font-weight:800;color:var(--white);margin-bottom:6px">Seu site sera deletado quando o timer zerar.</h2>
+  <p style="color:var(--dim);font-size:.82rem;margin-bottom:18px">Ative agora e tenha presenca digital a altura da sua formacao.</p>
+  <button class="btn-cta" onclick="scrollTop()">
     Ativar meu site — R$ 1.297 no PIX
-    <span>ou 10x de R$ 149,70 no cartao</span>
+    <small>ou 10x de R$ 149,70 no cartao</small>
   </button>
-  <div class="trust-line" style="margin-top:12px">
-    <div class="trust-item">
+  <div class="trust" style="margin-top:10px">
+    <div class="trust-i">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       Garantia 7 dias
     </div>
-    <div class="trust-item">
+    <div class="trust-i">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
       Pagamento seguro
     </div>
@@ -538,12 +549,11 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 </div>
 
 <footer>
-  Proposta exclusiva para Dr. Leonello Bocchese — site sera deletado em 48h se nao ativado
+  Proposta exclusiva para Dr. Leonello Bocchese — Clinica Adelle, Florianopolis/SC
 </footer>
-
 </div><!-- .page -->
 
-<!-- MOBILE STICKY -->
+<!-- Mobile Sticky -->
 <div class="sticky" id="sticky">
   <div class="sticky-inner">
     <div class="sticky-price">PIX <strong>R$ 1.297</strong></div>
@@ -552,78 +562,69 @@ footer{padding:24px;text-align:center;font-size:.65rem;color:var(--dim)}
 </div>
 
 <script>
-// Config
 const TOKEN='b8b10e9e-80d2-424f-86b9-403b9c85e7f6';
-const API=''; // Railway URL
+const API='';
 const EXPIRE=Date.now()+48*3600000;
 let method='pix';
 
-// Countdown
 function tick(){
   const d=EXPIRE-Date.now();
-  if(d<=0){document.getElementById('barTimer').textContent='DELETADO';document.getElementById('payBtn').disabled=true;document.querySelector('.urgency').style.background='#7f1d1d';return}
+  if(d<=0){document.getElementById('timer').textContent='DELETADO';document.getElementById('payBtn').disabled=true;document.querySelector('.urgency').style.background='#7f1d1d';return}
   const h=Math.floor(d/3.6e6),m=Math.floor(d%3.6e6/6e4),s=Math.floor(d%6e4/1e3);
-  document.getElementById('barTimer').textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.getElementById('timer').textContent=h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 }
 setInterval(tick,1000);tick();
 
-// Scroll
-const sticky=document.getElementById('sticky');
-window.addEventListener('scroll',()=>{sticky.classList.toggle('show',scrollY>500)});
+const stickyEl=document.getElementById('sticky');
+window.addEventListener('scroll',()=>{stickyEl.classList.toggle('show',scrollY>400)});
 
-// Intersection observer for animations
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.anim').forEach(e=>io.observe(e));
 
-// Payment method
-function pickMethod(el){
+function pick(el){
   document.querySelectorAll('.method').forEach(m=>m.classList.remove('active'));
   el.classList.add('active');method=el.dataset.method;
 }
 
-// Device switch
-function switchDevice(d,btn){
+function switchDev(d,btn){
   document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');
   ['Desktop','Tablet','Mobile'].forEach(n=>document.getElementById('d'+n).classList.toggle('off',n.toLowerCase()!==d));
 }
 
-// FAQ
 function togFaq(btn){
   const item=btn.parentElement,open=item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
   if(!open)item.classList.add('open');
 }
 
-// Domain check
-function checkDomain(){
+function onDomain(){
   const v=document.getElementById('domainInput').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
   document.getElementById('domainInput').value=v;
-  document.querySelector('.preview-url').textContent=v?v+'.com.br':'seudominio.com.br';
+  document.getElementById('previewUrl').textContent=v?v+'.com.br':'seudominio.com.br';
 }
 
-// Scroll top
 function scrollTop(){document.querySelector('.hero-right').scrollIntoView({behavior:'smooth'})}
 
-// Payment
 async function pay(){
   const btn=document.getElementById('payBtn');
   btn.disabled=true;btn.textContent='Processando...';
+  const dom=document.getElementById('domainInput').value.trim()+'.com.br';
   if(API){
     try{
-      const r=await fetch(`${API}/api/checkout/${TOKEN}/create-billing`,{
+      const r=await fetch(API+'/api/checkout/'+TOKEN+'/create-billing',{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({payment_method:method,domain:'drleonellobocchese.com.br',amount:method==='pix'?129700:149700,installments:method==='installments'?10:1})
+        body:JSON.stringify({payment_method:method,domain:dom,amount:method==='pix'?129700:149700,installments:method==='installments'?10:1})
       });
       const d=await r.json();
       if(d.checkout_url)return window.location.href=d.checkout_url;
       throw new Error(d.error||'Erro');
     }catch(e){
-      btn.disabled=false;btn.innerHTML='Ativar meu site agora<span>Pagamento seguro via AbacatePay</span>';
+      btn.disabled=false;btn.innerHTML='Ativar meu site agora<small>Pagamento 100% seguro — ativo em ate 24h</small>';
     }
   }else{
     setTimeout(()=>{
-      btn.disabled=false;btn.innerHTML='Ativar meu site agora<span>Pagamento seguro via AbacatePay</span>';
-      alert('Modo teste — Configure API_BASE para ativar pagamentos');
+      btn.disabled=false;btn.innerHTML='Ativar meu site agora<small>Pagamento 100% seguro — ativo em ate 24h</small>';
+      alert('Modo demo — Configure API para ativar pagamentos');
     },1500);
   }
 }
